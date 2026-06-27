@@ -1,4 +1,4 @@
-const API_URL = 'REEMPLAZAR_CON_URL_API_GATEWAY';
+const API_URL = 'https://pnj41nhlek.execute-api.us-east-1.amazonaws.com/dev';
 
 const SIGUIENTE = {
   'RECIBIDO':'EN_COCINA','EN_COCINA':'EN_DESPACHO',
