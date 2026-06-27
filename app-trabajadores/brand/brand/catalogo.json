@@ -1,0 +1,49 @@
+{
+  "moneda": "PEN",
+  "_nota": "Precios referenciales para el proyecto académico. Las imágenes se suben a S3 (ver README). image = key relativa dentro del bucket de assets.",
+  "categorias": [
+    {
+      "id": "combos",
+      "nombre": "Combos",
+      "items": [
+        { "id": "combo-2-presas", "nombre": "Combo 2 Presas", "descripcion": "2 presas de pollo, papas y bebida", "precio": 18.90, "imagen": "productos/combo-2-presas.jpg" },
+        { "id": "combo-3-presas", "nombre": "Combo 3 Presas", "descripcion": "3 presas de pollo, papas y bebida", "precio": 23.90, "imagen": "productos/combo-3-presas.jpg" },
+        { "id": "combo-tenders", "nombre": "Combo Tenders", "descripcion": "5 tenders, papas cajún y bebida", "precio": 21.90, "imagen": "productos/combo-tenders.jpg" }
+      ]
+    },
+    {
+      "id": "pollo",
+      "nombre": "Pollo",
+      "items": [
+        { "id": "presa-individual", "nombre": "Presa Individual", "descripcion": "1 presa de pollo crocante", "precio": 6.50, "imagen": "productos/presa-individual.jpg" },
+        { "id": "tenders-5", "nombre": "Tenders x5", "descripcion": "5 tiras de pechuga empanizada", "precio": 14.90, "imagen": "productos/tenders-5.jpg" },
+        { "id": "balde-8", "nombre": "Balde 8 Presas", "descripcion": "8 presas para compartir", "precio": 49.90, "imagen": "productos/balde-8.jpg" }
+      ]
+    },
+    {
+      "id": "sandwiches",
+      "nombre": "Sándwiches",
+      "items": [
+        { "id": "sandwich-clasico", "nombre": "Sándwich de Pollo", "descripcion": "Filete crocante, pan brioche y pickles", "precio": 13.90, "imagen": "productos/sandwich-clasico.jpg" },
+        { "id": "sandwich-picante", "nombre": "Sándwich Picante", "descripcion": "Filete crocante con salsa picante", "precio": 14.90, "imagen": "productos/sandwich-picante.jpg" }
+      ]
+    },
+    {
+      "id": "acompanamientos",
+      "nombre": "Acompañamientos",
+      "items": [
+        { "id": "papas-cajun", "nombre": "Papas Cajún", "descripcion": "Papas sazonadas estilo Louisiana", "precio": 7.50, "imagen": "productos/papas-cajun.jpg" },
+        { "id": "pure", "nombre": "Puré con Salsa", "descripcion": "Puré cremoso con salsa de la casa", "precio": 6.90, "imagen": "productos/pure.jpg" },
+        { "id": "biscuit", "nombre": "Biscuit", "descripcion": "Pan de mantequilla horneado", "precio": 4.50, "imagen": "productos/biscuit.jpg" }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "nombre": "Bebidas",
+      "items": [
+        { "id": "gaseosa-500", "nombre": "Gaseosa 500ml", "descripcion": "Bebida gaseosa a elección", "precio": 5.50, "imagen": "productos/gaseosa.jpg" },
+        { "id": "agua", "nombre": "Agua 600ml", "descripcion": "Agua sin gas", "precio": 4.00, "imagen": "productos/agua.jpg" }
+      ]
+    }
+  ]
+}

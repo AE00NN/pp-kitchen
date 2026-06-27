@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popeyes — Cocina</title>
+  <link rel="stylesheet" href="brand/tokens.css">
+  <link rel="stylesheet" href="brand/popeyes-kit.css">
+</head>
+<body>
+  <header class="pp-header">
+    <span>🍗 Popeyes — Panel de Cocina</span>
+  </header>
+  <main style="padding:2rem; max-width:900px; margin:auto;">
+    <h2>Cola de pedidos (FIFO)</h2>
+    <table class="pp-table">
+      <thead>
+        <tr><th>#</th><th>Order ID</th><th>Estado</th><th>Worker</th><th>Acción</th></tr>
+      </thead>
+      <tbody id="filas-pedidos"><tr><td colspan="5">Cargando...</td></tr></tbody>
+    </table>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

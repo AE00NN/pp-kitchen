@@ -1,0 +1,80 @@
+{
+  "Comment": "Workflow de cocina Popeyes - pp-kitchen",
+  "StartAt": "RECIBIDO",
+  "States": {
+    "RECIBIDO": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "estado": "RECIBIDO"
+        }
+      },
+      "ResultPath": null,
+      "Next": "EN_COCINA"
+    },
+    "EN_COCINA": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["RegistrarLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "estado": "EN_COCINA",
+          "workerId.$": "$.workerId",
+          "taskToken.$": "$$.Task.Token"
+        }
+      },
+      "ResultPath": null,
+      "Next": "EN_DESPACHO",
+      "HeartbeatSeconds": 3600
+    },
+    "EN_DESPACHO": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["RegistrarLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "estado": "EN_DESPACHO",
+          "workerId.$": "$.workerId",
+          "taskToken.$": "$$.Task.Token"
+        }
+      },
+      "ResultPath": null,
+      "Next": "EN_REPARTO",
+      "HeartbeatSeconds": 3600
+    },
+    "EN_REPARTO": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["RegistrarLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "estado": "EN_REPARTO",
+          "workerId.$": "$.workerId",
+          "taskToken.$": "$$.Task.Token"
+        }
+      },
+      "ResultPath": null,
+      "Next": "ENTREGADO",
+      "HeartbeatSeconds": 7200
+    },
+    "ENTREGADO": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "estado": "ENTREGADO"
+        }
+      },
+      "ResultPath": null,
+      "End": true
+    }
+  }
+}

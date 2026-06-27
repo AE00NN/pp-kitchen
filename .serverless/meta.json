@@ -1,0 +1,2594 @@
+{
+  "/home/ubuntu/pp-kitchen/serverless.yml": {
+    "versionFramework": "4.38.1",
+    "servicePath": "/home/ubuntu/pp-kitchen/serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "pp-kitchen",
+      "provider": {
+        "name": "aws",
+        "runtime": "python3.12",
+        "region": "us-east-1",
+        "iam": {
+          "role": "arn:aws:iam::048311469334:role/LabRole"
+        },
+        "environment": {
+          "TASKS_TABLE": "pp-tasks",
+          "EVENT_BUS_NAME": "pp-bus"
+        },
+        "stage": "dev",
+        "versionFunctions": true,
+        "compiledCloudFormationTemplate": {
+          "AWSTemplateFormatVersion": "2010-09-09",
+          "Description": "The AWS CloudFormation template for this Serverless application",
+          "Resources": {
+            "RegistrarLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/pp-kitchen-dev-registrar"
+              }
+            },
+            "CompletarLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/pp-kitchen-dev-completar"
+              }
+            },
+            "ListarPendientesLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/pp-kitchen-dev-listarPendientes"
+              }
+            },
+            "EmitirStepCompletedLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/pp-kitchen-dev-emitirStepCompleted"
+              }
+            },
+            "IniciarWorkflowLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/pp-kitchen-dev-iniciarWorkflow"
+              }
+            },
+            "RegistrarLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                  "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+                },
+                "Handler": "functions/registrar.handler",
+                "Runtime": "python3.12",
+                "FunctionName": "pp-kitchen-dev-registrar",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Environment": {
+                  "Variables": {
+                    "TASKS_TABLE": "pp-tasks",
+                    "EVENT_BUS_NAME": "pp-bus"
+                  }
+                },
+                "Role": "arn:aws:iam::048311469334:role/LabRole"
+              },
+              "DependsOn": [
+                "RegistrarLogGroup"
+              ]
+            },
+            "CompletarLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                  "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+                },
+                "Handler": "functions/completar.handler",
+                "Runtime": "python3.12",
+                "FunctionName": "pp-kitchen-dev-completar",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Environment": {
+                  "Variables": {
+                    "TASKS_TABLE": "pp-tasks",
+                    "EVENT_BUS_NAME": "pp-bus"
+                  }
+                },
+                "Role": "arn:aws:iam::048311469334:role/LabRole"
+              },
+              "DependsOn": [
+                "CompletarLogGroup"
+              ]
+            },
+            "ListarPendientesLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                  "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+                },
+                "Handler": "functions/listar_pendientes.handler",
+                "Runtime": "python3.12",
+                "FunctionName": "pp-kitchen-dev-listarPendientes",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Environment": {
+                  "Variables": {
+                    "TASKS_TABLE": "pp-tasks",
+                    "EVENT_BUS_NAME": "pp-bus"
+                  }
+                },
+                "Role": "arn:aws:iam::048311469334:role/LabRole"
+              },
+              "DependsOn": [
+                "ListarPendientesLogGroup"
+              ]
+            },
+            "EmitirStepCompletedLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                  "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+                },
+                "Handler": "functions/emitir_step_completed.handler",
+                "Runtime": "python3.12",
+                "FunctionName": "pp-kitchen-dev-emitirStepCompleted",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Environment": {
+                  "Variables": {
+                    "TASKS_TABLE": "pp-tasks",
+                    "EVENT_BUS_NAME": "pp-bus"
+                  }
+                },
+                "Role": "arn:aws:iam::048311469334:role/LabRole"
+              },
+              "DependsOn": [
+                "EmitirStepCompletedLogGroup"
+              ]
+            },
+            "IniciarWorkflowLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                  "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+                },
+                "Handler": "functions/iniciar_workflow.handler",
+                "Runtime": "python3.12",
+                "FunctionName": "pp-kitchen-dev-iniciarWorkflow",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Environment": {
+                  "Variables": {
+                    "TASKS_TABLE": "pp-tasks",
+                    "EVENT_BUS_NAME": "pp-bus",
+                    "STATE_MACHINE_ARN": {
+                      "Fn::Sub": "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+                    }
+                  }
+                },
+                "Role": "arn:aws:iam::048311469334:role/LabRole"
+              },
+              "DependsOn": [
+                "IniciarWorkflowLogGroup"
+              ]
+            },
+            "RegistrarLambdaVersion4V6BRV9RwQzNUkl48zGxeo00aqXDlxvHgLMgFuwwU": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "RegistrarLambdaFunction"
+                },
+                "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+              }
+            },
+            "CompletarLambdaVersiontxbZXWUCiiLDj9A7pqYhnGacjLGEMBpLLzXwKMGKc": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "CompletarLambdaFunction"
+                },
+                "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+              }
+            },
+            "ListarPendientesLambdaVersiontk5lyWtavaNIHI6TmD9IrMWI5jNxq8ZOL19JyA6uM": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "ListarPendientesLambdaFunction"
+                },
+                "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+              }
+            },
+            "EmitirStepCompletedLambdaVersionD10WnWby21B0voEW9AQOhTKxy5oEicTYb6g2kGA": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "EmitirStepCompletedLambdaFunction"
+                },
+                "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+              }
+            },
+            "IniciarWorkflowLambdaVersionqm7OOQcvnesRAJHtvRC8D00FwIpoy1qnv37PqOQIE": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "IniciarWorkflowLambdaFunction"
+                },
+                "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+              }
+            },
+            "PpDashkitchenDashsm": {
+              "Type": "AWS::StepFunctions::StateMachine",
+              "Properties": {
+                "DefinitionString": {
+                  "Fn::Sub": [
+                    "{\n  \"Comment\": \"Workflow de cocina Popeyes - pp-kitchen\",\n  \"StartAt\": \"RECIBIDO\",\n  \"States\": {\n    \"RECIBIDO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"RECIBIDO\"\n        }\n      },\n      \"Next\": \"EN_COCINA\",\n      \"ResultPath\": null\n    },\n    \"EN_COCINA\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_COCINA\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"EN_DESPACHO\",\n      \"HeartbeatSeconds\": 3600,\n      \"ResultPath\": null\n    },\n    \"EN_DESPACHO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_DESPACHO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"EN_REPARTO\",\n      \"HeartbeatSeconds\": 3600,\n      \"ResultPath\": null\n    },\n    \"EN_REPARTO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_REPARTO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"ENTREGADO\",\n      \"HeartbeatSeconds\": 7200,\n      \"ResultPath\": null\n    },\n    \"ENTREGADO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"ENTREGADO\"\n        }\n      },\n      \"End\": true,\n      \"ResultPath\": null\n    }\n  }\n}",
+                    {
+                      "e2a6470b743c3ecee83b984ab90412c9": {
+                        "Fn::GetAtt": [
+                          "EmitirStepCompletedLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "d017b02987a60784aa244e16617956a7": {
+                        "Fn::GetAtt": [
+                          "RegistrarLambdaFunction",
+                          "Arn"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "RoleArn": "arn:aws:iam::048311469334:role/LabRole",
+                "StateMachineName": "pp-kitchen-sm"
+              },
+              "DependsOn": []
+            },
+            "ApiGatewayRestApi": {
+              "Type": "AWS::ApiGateway::RestApi",
+              "Properties": {
+                "Name": "dev-pp-kitchen",
+                "EndpointConfiguration": {
+                  "Types": [
+                    "EDGE"
+                  ]
+                },
+                "Policy": ""
+              }
+            },
+            "ApiGatewayResourceTasks": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Fn::GetAtt": [
+                    "ApiGatewayRestApi",
+                    "RootResourceId"
+                  ]
+                },
+                "PathPart": "tasks",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceTasksCompletar": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Ref": "ApiGatewayResourceTasks"
+                },
+                "PathPart": "completar",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayResourceTasksPendientes": {
+              "Type": "AWS::ApiGateway::Resource",
+              "Properties": {
+                "ParentId": {
+                  "Ref": "ApiGatewayResourceTasks"
+                },
+                "PathPart": "pendientes",
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayMethodTasksCompletarOptions": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "AuthorizationType": "NONE",
+                "HttpMethod": "OPTIONS",
+                "MethodResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": true,
+                      "method.response.header.Access-Control-Allow-Headers": true,
+                      "method.response.header.Access-Control-Allow-Methods": true
+                    },
+                    "ResponseModels": {}
+                  }
+                ],
+                "RequestParameters": {},
+                "Integration": {
+                  "Type": "MOCK",
+                  "RequestTemplates": {
+                    "application/json": "{statusCode:200}"
+                  },
+                  "ContentHandling": "CONVERT_TO_TEXT",
+                  "IntegrationResponses": [
+                    {
+                      "StatusCode": "200",
+                      "ResponseParameters": {
+                        "method.response.header.Access-Control-Allow-Origin": "'*'",
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                      },
+                      "ResponseTemplates": {
+                        "application/json": ""
+                      }
+                    }
+                  ]
+                },
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceTasksCompletar"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayMethodTasksPendientesOptions": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "AuthorizationType": "NONE",
+                "HttpMethod": "OPTIONS",
+                "MethodResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": true,
+                      "method.response.header.Access-Control-Allow-Headers": true,
+                      "method.response.header.Access-Control-Allow-Methods": true
+                    },
+                    "ResponseModels": {}
+                  }
+                ],
+                "RequestParameters": {},
+                "Integration": {
+                  "Type": "MOCK",
+                  "RequestTemplates": {
+                    "application/json": "{statusCode:200}"
+                  },
+                  "ContentHandling": "CONVERT_TO_TEXT",
+                  "IntegrationResponses": [
+                    {
+                      "StatusCode": "200",
+                      "ResponseParameters": {
+                        "method.response.header.Access-Control-Allow-Origin": "'*'",
+                        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                      },
+                      "ResponseTemplates": {
+                        "application/json": ""
+                      }
+                    }
+                  ]
+                },
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceTasksPendientes"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                }
+              }
+            },
+            "ApiGatewayMethodTasksCompletarPost": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "POST",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceTasksCompletar"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "CompletarLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "CompletarLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayMethodTasksPendientesGet": {
+              "Type": "AWS::ApiGateway::Method",
+              "Properties": {
+                "HttpMethod": "GET",
+                "RequestParameters": {},
+                "ResourceId": {
+                  "Ref": "ApiGatewayResourceTasksPendientes"
+                },
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "ApiKeyRequired": "<REDACTED>",
+                "AuthorizationType": "NONE",
+                "Integration": {
+                  "IntegrationHttpMethod": "POST",
+                  "Type": "AWS_PROXY",
+                  "Uri": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition"
+                        },
+                        ":apigateway:",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        ":lambda:path/2015-03-31/functions/",
+                        {
+                          "Fn::GetAtt": [
+                            "ListarPendientesLambdaFunction",
+                            "Arn"
+                          ]
+                        },
+                        "/invocations"
+                      ]
+                    ]
+                  }
+                },
+                "MethodResponses": []
+              },
+              "DependsOn": [
+                "ListarPendientesLambdaPermissionApiGateway"
+              ]
+            },
+            "ApiGatewayDeployment1782580002367": {
+              "Type": "AWS::ApiGateway::Deployment",
+              "Properties": {
+                "RestApiId": {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                "StageName": "dev"
+              },
+              "DependsOn": [
+                "ApiGatewayMethodTasksCompletarOptions",
+                "ApiGatewayMethodTasksPendientesOptions",
+                "ApiGatewayMethodTasksCompletarPost",
+                "ApiGatewayMethodTasksPendientesGet"
+              ]
+            },
+            "CompletarLambdaPermissionApiGateway": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "CompletarLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "ApiGatewayRestApi"
+                      },
+                      "/*/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "ListarPendientesLambdaPermissionApiGateway": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "ListarPendientesLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "ApiGatewayRestApi"
+                      },
+                      "/*/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "TasksTable": {
+              "Type": "AWS::DynamoDB::Table",
+              "Properties": {
+                "TableName": "pp-tasks",
+                "BillingMode": "PAY_PER_REQUEST",
+                "AttributeDefinitions": [
+                  {
+                    "AttributeName": "orderId",
+                    "AttributeType": "S"
+                  },
+                  {
+                    "AttributeName": "estado",
+                    "AttributeType": "S"
+                  }
+                ],
+                "KeySchema": [
+                  {
+                    "AttributeName": "orderId",
+                    "KeyType": "HASH"
+                  },
+                  {
+                    "AttributeName": "estado",
+                    "KeyType": "RANGE"
+                  }
+                ]
+              }
+            },
+            "KitchenSMParam": {
+              "Type": "AWS::SSM::Parameter",
+              "Properties": {
+                "Name": "/pp/kitchen-sm-arn",
+                "Type": "String",
+                "Value": {
+                  "Fn::Sub": "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+                }
+              }
+            },
+            "OrderCreatedRule": {
+              "Type": "AWS::Events::Rule",
+              "Properties": {
+                "Name": "pp-kitchen-order-created-rule",
+                "EventBusName": "pp-bus",
+                "EventPattern": {
+                  "source": [
+                    "pp.orders"
+                  ],
+                  "detail-type": [
+                    "order.created"
+                  ]
+                },
+                "State": "ENABLED",
+                "Targets": [
+                  {
+                    "Id": "IniciarWorkflowTarget",
+                    "Arn": {
+                      "Fn::GetAtt": [
+                        "IniciarWorkflowLambdaFunction",
+                        "Arn"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "OrderCreatedRulePermission": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "IniciarWorkflowLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "events.amazonaws.com",
+                "SourceArn": {
+                  "Fn::GetAtt": [
+                    "OrderCreatedRule",
+                    "Arn"
+                  ]
+                }
+              }
+            }
+          },
+          "Outputs": {
+            "ServerlessDeploymentBucketName": {
+              "Value": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+              "Export": {
+                "Name": "sls-pp-kitchen-dev-ServerlessDeploymentBucketName"
+              }
+            },
+            "RegistrarLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "RegistrarLambdaVersion4V6BRV9RwQzNUkl48zGxeo00aqXDlxvHgLMgFuwwU"
+              },
+              "Export": {
+                "Name": "sls-pp-kitchen-dev-RegistrarLambdaFunctionQualifiedArn"
+              }
+            },
+            "CompletarLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "CompletarLambdaVersiontxbZXWUCiiLDj9A7pqYhnGacjLGEMBpLLzXwKMGKc"
+              },
+              "Export": {
+                "Name": "sls-pp-kitchen-dev-CompletarLambdaFunctionQualifiedArn"
+              }
+            },
+            "ListarPendientesLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "ListarPendientesLambdaVersiontk5lyWtavaNIHI6TmD9IrMWI5jNxq8ZOL19JyA6uM"
+              },
+              "Export": {
+                "Name": "sls-pp-kitchen-dev-ListarPendientesLambdaFunctionQualifiedArn"
+              }
+            },
+            "EmitirStepCompletedLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "EmitirStepCompletedLambdaVersionD10WnWby21B0voEW9AQOhTKxy5oEicTYb6g2kGA"
+              },
+              "Export": {
+                "Name": "sls-pp-kitchen-dev-EmitirStepCompletedLambdaFunctionQualifiedArn"
+              }
+            },
+            "IniciarWorkflowLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "IniciarWorkflowLambdaVersionqm7OOQcvnesRAJHtvRC8D00FwIpoy1qnv37PqOQIE"
+              },
+              "Export": {
+                "Name": "sls-pp-kitchen-dev-IniciarWorkflowLambdaFunctionQualifiedArn"
+              }
+            },
+            "PpDashkitchenDashsmArn": {
+              "Description": "Current StateMachine Arn",
+              "Value": {
+                "Ref": "PpDashkitchenDashsm"
+              },
+              "Export": {
+                "Name": "sls-pp-kitchen-dev-PpDashkitchenDashsmArn"
+              }
+            },
+            "ServiceEndpoint": {
+              "Description": "URL of the service endpoint",
+              "Value": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "https://",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    ".execute-api.",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ".",
+                    {
+                      "Ref": "AWS::URLSuffix"
+                    },
+                    "/dev"
+                  ]
+                ]
+              },
+              "Export": {
+                "Name": "sls-pp-kitchen-dev-ServiceEndpoint"
+              }
+            }
+          }
+        },
+        "vpc": {}
+      },
+      "plugins": [
+        "serverless-step-functions"
+      ],
+      "custom": {
+        "stateMachineName": "pp-kitchen-sm"
+      },
+      "functions": {
+        "registrar": {
+          "handler": "functions/registrar.handler",
+          "events": [],
+          "name": "pp-kitchen-dev-registrar",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "python3.12",
+          "vpc": {},
+          "versionLogicalId": "RegistrarLambdaVersion4V6BRV9RwQzNUkl48zGxeo00aqXDlxvHgLMgFuwwU"
+        },
+        "completar": {
+          "handler": "functions/completar.handler",
+          "events": [
+            {
+              "http": {
+                "path": "tasks/completar",
+                "method": "post",
+                "cors": {
+                  "origin": "*",
+                  "methods": [
+                    "OPTIONS",
+                    "POST"
+                  ],
+                  "headers": [
+                    "Content-Type",
+                    "X-Amz-Date",
+                    "Authorization",
+                    "X-Api-Key",
+                    "X-Amz-Security-Token",
+                    "X-Amz-User-Agent",
+                    "X-Amzn-Trace-Id"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                },
+                "integration": "AWS_PROXY"
+              }
+            }
+          ],
+          "name": "pp-kitchen-dev-completar",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "python3.12",
+          "vpc": {},
+          "versionLogicalId": "CompletarLambdaVersiontxbZXWUCiiLDj9A7pqYhnGacjLGEMBpLLzXwKMGKc"
+        },
+        "listarPendientes": {
+          "handler": "functions/listar_pendientes.handler",
+          "events": [
+            {
+              "http": {
+                "path": "tasks/pendientes",
+                "method": "get",
+                "cors": {
+                  "origin": "*",
+                  "methods": [
+                    "OPTIONS",
+                    "GET"
+                  ],
+                  "headers": [
+                    "Content-Type",
+                    "X-Amz-Date",
+                    "Authorization",
+                    "X-Api-Key",
+                    "X-Amz-Security-Token",
+                    "X-Amz-User-Agent",
+                    "X-Amzn-Trace-Id"
+                  ],
+                  "allowCredentials": "<REDACTED>"
+                },
+                "integration": "AWS_PROXY"
+              }
+            }
+          ],
+          "name": "pp-kitchen-dev-listarPendientes",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "python3.12",
+          "vpc": {},
+          "versionLogicalId": "ListarPendientesLambdaVersiontk5lyWtavaNIHI6TmD9IrMWI5jNxq8ZOL19JyA6uM"
+        },
+        "emitirStepCompleted": {
+          "handler": "functions/emitir_step_completed.handler",
+          "events": [],
+          "name": "pp-kitchen-dev-emitirStepCompleted",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "python3.12",
+          "vpc": {},
+          "versionLogicalId": "EmitirStepCompletedLambdaVersionD10WnWby21B0voEW9AQOhTKxy5oEicTYb6g2kGA"
+        },
+        "iniciarWorkflow": {
+          "handler": "functions/iniciar_workflow.handler",
+          "environment": {
+            "STATE_MACHINE_ARN": {
+              "Fn::Sub": "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+            }
+          },
+          "events": [],
+          "name": "pp-kitchen-dev-iniciarWorkflow",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "python3.12",
+          "vpc": {},
+          "versionLogicalId": "IniciarWorkflowLambdaVersionqm7OOQcvnesRAJHtvRC8D00FwIpoy1qnv37PqOQIE"
+        }
+      },
+      "stepFunctions": {
+        "stateMachines": {
+          "kitchenWorkflow": {
+            "name": "pp-kitchen-sm",
+            "role": "arn:aws:iam::048311469334:role/LabRole",
+            "definition": {
+              "Comment": "Workflow de cocina Popeyes - pp-kitchen",
+              "StartAt": "RECIBIDO",
+              "States": {
+                "RECIBIDO": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:states:::lambda:invoke",
+                  "Parameters": {
+                    "FunctionName": "${e2a6470b743c3ecee83b984ab90412c9}",
+                    "Payload": {
+                      "orderId.$": "$.orderId",
+                      "estado": "RECIBIDO"
+                    }
+                  },
+                  "Next": "EN_COCINA",
+                  "ResultPath": null
+                },
+                "EN_COCINA": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
+                  "Parameters": {
+                    "FunctionName": "${d017b02987a60784aa244e16617956a7}",
+                    "Payload": {
+                      "orderId.$": "$.orderId",
+                      "estado": "EN_COCINA",
+                      "workerId.$": "$.workerId",
+                      "taskToken.$": "<REDACTED>"
+                    }
+                  },
+                  "Next": "EN_DESPACHO",
+                  "HeartbeatSeconds": 3600,
+                  "ResultPath": null
+                },
+                "EN_DESPACHO": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
+                  "Parameters": {
+                    "FunctionName": "${d017b02987a60784aa244e16617956a7}",
+                    "Payload": {
+                      "orderId.$": "$.orderId",
+                      "estado": "EN_DESPACHO",
+                      "workerId.$": "$.workerId",
+                      "taskToken.$": "<REDACTED>"
+                    }
+                  },
+                  "Next": "EN_REPARTO",
+                  "HeartbeatSeconds": 3600,
+                  "ResultPath": null
+                },
+                "EN_REPARTO": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
+                  "Parameters": {
+                    "FunctionName": "${d017b02987a60784aa244e16617956a7}",
+                    "Payload": {
+                      "orderId.$": "$.orderId",
+                      "estado": "EN_REPARTO",
+                      "workerId.$": "$.workerId",
+                      "taskToken.$": "<REDACTED>"
+                    }
+                  },
+                  "Next": "ENTREGADO",
+                  "HeartbeatSeconds": 7200,
+                  "ResultPath": null
+                },
+                "ENTREGADO": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:states:::lambda:invoke",
+                  "Parameters": {
+                    "FunctionName": "${e2a6470b743c3ecee83b984ab90412c9}",
+                    "Payload": {
+                      "orderId.$": "$.orderId",
+                      "estado": "ENTREGADO"
+                    }
+                  },
+                  "End": true,
+                  "ResultPath": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "resources": {
+        "Resources": {
+          "TasksTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "pp-tasks",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "orderId",
+                  "AttributeType": "S"
+                },
+                {
+                  "AttributeName": "estado",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "orderId",
+                  "KeyType": "HASH"
+                },
+                {
+                  "AttributeName": "estado",
+                  "KeyType": "RANGE"
+                }
+              ]
+            }
+          },
+          "KitchenSMParam": {
+            "Type": "AWS::SSM::Parameter",
+            "Properties": {
+              "Name": "/pp/kitchen-sm-arn",
+              "Type": "String",
+              "Value": {
+                "Fn::Sub": "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+              }
+            }
+          },
+          "OrderCreatedRule": {
+            "Type": "AWS::Events::Rule",
+            "Properties": {
+              "Name": "pp-kitchen-order-created-rule",
+              "EventBusName": "pp-bus",
+              "EventPattern": {
+                "source": [
+                  "pp.orders"
+                ],
+                "detail-type": [
+                  "order.created"
+                ]
+              },
+              "State": "ENABLED",
+              "Targets": [
+                {
+                  "Id": "IniciarWorkflowTarget",
+                  "Arn": {
+                    "Fn::GetAtt": [
+                      "IniciarWorkflowLambdaFunction",
+                      "Arn"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "OrderCreatedRulePermission": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "IniciarWorkflowLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "events.amazonaws.com",
+              "SourceArn": {
+                "Fn::GetAtt": [
+                  "OrderCreatedRule",
+                  "Arn"
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {}
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "python3.12",
+      "region": "us-east-1",
+      "iam": {
+        "role": "arn:aws:iam::048311469334:role/LabRole"
+      },
+      "environment": {
+        "TASKS_TABLE": "pp-tasks",
+        "EVENT_BUS_NAME": "pp-bus"
+      },
+      "stage": "dev",
+      "versionFunctions": true,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "RegistrarLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/pp-kitchen-dev-registrar"
+            }
+          },
+          "CompletarLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/pp-kitchen-dev-completar"
+            }
+          },
+          "ListarPendientesLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/pp-kitchen-dev-listarPendientes"
+            }
+          },
+          "EmitirStepCompletedLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/pp-kitchen-dev-emitirStepCompleted"
+            }
+          },
+          "IniciarWorkflowLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/pp-kitchen-dev-iniciarWorkflow"
+            }
+          },
+          "RegistrarLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+              },
+              "Handler": "functions/registrar.handler",
+              "Runtime": "python3.12",
+              "FunctionName": "pp-kitchen-dev-registrar",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TASKS_TABLE": "pp-tasks",
+                  "EVENT_BUS_NAME": "pp-bus"
+                }
+              },
+              "Role": "arn:aws:iam::048311469334:role/LabRole"
+            },
+            "DependsOn": [
+              "RegistrarLogGroup"
+            ]
+          },
+          "CompletarLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+              },
+              "Handler": "functions/completar.handler",
+              "Runtime": "python3.12",
+              "FunctionName": "pp-kitchen-dev-completar",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TASKS_TABLE": "pp-tasks",
+                  "EVENT_BUS_NAME": "pp-bus"
+                }
+              },
+              "Role": "arn:aws:iam::048311469334:role/LabRole"
+            },
+            "DependsOn": [
+              "CompletarLogGroup"
+            ]
+          },
+          "ListarPendientesLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+              },
+              "Handler": "functions/listar_pendientes.handler",
+              "Runtime": "python3.12",
+              "FunctionName": "pp-kitchen-dev-listarPendientes",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TASKS_TABLE": "pp-tasks",
+                  "EVENT_BUS_NAME": "pp-bus"
+                }
+              },
+              "Role": "arn:aws:iam::048311469334:role/LabRole"
+            },
+            "DependsOn": [
+              "ListarPendientesLogGroup"
+            ]
+          },
+          "EmitirStepCompletedLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+              },
+              "Handler": "functions/emitir_step_completed.handler",
+              "Runtime": "python3.12",
+              "FunctionName": "pp-kitchen-dev-emitirStepCompleted",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TASKS_TABLE": "pp-tasks",
+                  "EVENT_BUS_NAME": "pp-bus"
+                }
+              },
+              "Role": "arn:aws:iam::048311469334:role/LabRole"
+            },
+            "DependsOn": [
+              "EmitirStepCompletedLogGroup"
+            ]
+          },
+          "IniciarWorkflowLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+                "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+              },
+              "Handler": "functions/iniciar_workflow.handler",
+              "Runtime": "python3.12",
+              "FunctionName": "pp-kitchen-dev-iniciarWorkflow",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TASKS_TABLE": "pp-tasks",
+                  "EVENT_BUS_NAME": "pp-bus",
+                  "STATE_MACHINE_ARN": {
+                    "Fn::Sub": "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+                  }
+                }
+              },
+              "Role": "arn:aws:iam::048311469334:role/LabRole"
+            },
+            "DependsOn": [
+              "IniciarWorkflowLogGroup"
+            ]
+          },
+          "RegistrarLambdaVersion4V6BRV9RwQzNUkl48zGxeo00aqXDlxvHgLMgFuwwU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "RegistrarLambdaFunction"
+              },
+              "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+            }
+          },
+          "CompletarLambdaVersiontxbZXWUCiiLDj9A7pqYhnGacjLGEMBpLLzXwKMGKc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CompletarLambdaFunction"
+              },
+              "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+            }
+          },
+          "ListarPendientesLambdaVersiontk5lyWtavaNIHI6TmD9IrMWI5jNxq8ZOL19JyA6uM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ListarPendientesLambdaFunction"
+              },
+              "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+            }
+          },
+          "EmitirStepCompletedLambdaVersionD10WnWby21B0voEW9AQOhTKxy5oEicTYb6g2kGA": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "EmitirStepCompletedLambdaFunction"
+              },
+              "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+            }
+          },
+          "IniciarWorkflowLambdaVersionqm7OOQcvnesRAJHtvRC8D00FwIpoy1qnv37PqOQIE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "IniciarWorkflowLambdaFunction"
+              },
+              "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+            }
+          },
+          "PpDashkitchenDashsm": {
+            "Type": "AWS::StepFunctions::StateMachine",
+            "Properties": {
+              "DefinitionString": {
+                "Fn::Sub": [
+                  "{\n  \"Comment\": \"Workflow de cocina Popeyes - pp-kitchen\",\n  \"StartAt\": \"RECIBIDO\",\n  \"States\": {\n    \"RECIBIDO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"RECIBIDO\"\n        }\n      },\n      \"Next\": \"EN_COCINA\",\n      \"ResultPath\": null\n    },\n    \"EN_COCINA\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_COCINA\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"EN_DESPACHO\",\n      \"HeartbeatSeconds\": 3600,\n      \"ResultPath\": null\n    },\n    \"EN_DESPACHO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_DESPACHO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"EN_REPARTO\",\n      \"HeartbeatSeconds\": 3600,\n      \"ResultPath\": null\n    },\n    \"EN_REPARTO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_REPARTO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"ENTREGADO\",\n      \"HeartbeatSeconds\": 7200,\n      \"ResultPath\": null\n    },\n    \"ENTREGADO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"ENTREGADO\"\n        }\n      },\n      \"End\": true,\n      \"ResultPath\": null\n    }\n  }\n}",
+                  {
+                    "e2a6470b743c3ecee83b984ab90412c9": {
+                      "Fn::GetAtt": [
+                        "EmitirStepCompletedLambdaFunction",
+                        "Arn"
+                      ]
+                    },
+                    "d017b02987a60784aa244e16617956a7": {
+                      "Fn::GetAtt": [
+                        "RegistrarLambdaFunction",
+                        "Arn"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "RoleArn": "arn:aws:iam::048311469334:role/LabRole",
+              "StateMachineName": "pp-kitchen-sm"
+            },
+            "DependsOn": []
+          },
+          "ApiGatewayRestApi": {
+            "Type": "AWS::ApiGateway::RestApi",
+            "Properties": {
+              "Name": "dev-pp-kitchen",
+              "EndpointConfiguration": {
+                "Types": [
+                  "EDGE"
+                ]
+              },
+              "Policy": ""
+            }
+          },
+          "ApiGatewayResourceTasks": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "tasks",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceTasksCompletar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceTasks"
+              },
+              "PathPart": "completar",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceTasksPendientes": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceTasks"
+              },
+              "PathPart": "pendientes",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodTasksCompletarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceTasksCompletar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodTasksPendientesOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceTasksPendientes"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodTasksCompletarPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceTasksCompletar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": "<REDACTED>",
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "CompletarLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "CompletarLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodTasksPendientesGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceTasksPendientes"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": "<REDACTED>",
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "ListarPendientesLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "ListarPendientesLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1782580002367": {
+            "Type": "AWS::ApiGateway::Deployment",
+            "Properties": {
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "StageName": "dev"
+            },
+            "DependsOn": [
+              "ApiGatewayMethodTasksCompletarOptions",
+              "ApiGatewayMethodTasksPendientesOptions",
+              "ApiGatewayMethodTasksCompletarPost",
+              "ApiGatewayMethodTasksPendientesGet"
+            ]
+          },
+          "CompletarLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CompletarLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "ListarPendientesLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ListarPendientesLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "TasksTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "pp-tasks",
+              "BillingMode": "PAY_PER_REQUEST",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "orderId",
+                  "AttributeType": "S"
+                },
+                {
+                  "AttributeName": "estado",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "orderId",
+                  "KeyType": "HASH"
+                },
+                {
+                  "AttributeName": "estado",
+                  "KeyType": "RANGE"
+                }
+              ]
+            }
+          },
+          "KitchenSMParam": {
+            "Type": "AWS::SSM::Parameter",
+            "Properties": {
+              "Name": "/pp/kitchen-sm-arn",
+              "Type": "String",
+              "Value": {
+                "Fn::Sub": "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+              }
+            }
+          },
+          "OrderCreatedRule": {
+            "Type": "AWS::Events::Rule",
+            "Properties": {
+              "Name": "pp-kitchen-order-created-rule",
+              "EventBusName": "pp-bus",
+              "EventPattern": {
+                "source": [
+                  "pp.orders"
+                ],
+                "detail-type": [
+                  "order.created"
+                ]
+              },
+              "State": "ENABLED",
+              "Targets": [
+                {
+                  "Id": "IniciarWorkflowTarget",
+                  "Arn": {
+                    "Fn::GetAtt": [
+                      "IniciarWorkflowLambdaFunction",
+                      "Arn"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "OrderCreatedRulePermission": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "IniciarWorkflowLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "events.amazonaws.com",
+              "SourceArn": {
+                "Fn::GetAtt": [
+                  "OrderCreatedRule",
+                  "Arn"
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+            "Export": {
+              "Name": "sls-pp-kitchen-dev-ServerlessDeploymentBucketName"
+            }
+          },
+          "RegistrarLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "RegistrarLambdaVersion4V6BRV9RwQzNUkl48zGxeo00aqXDlxvHgLMgFuwwU"
+            },
+            "Export": {
+              "Name": "sls-pp-kitchen-dev-RegistrarLambdaFunctionQualifiedArn"
+            }
+          },
+          "CompletarLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CompletarLambdaVersiontxbZXWUCiiLDj9A7pqYhnGacjLGEMBpLLzXwKMGKc"
+            },
+            "Export": {
+              "Name": "sls-pp-kitchen-dev-CompletarLambdaFunctionQualifiedArn"
+            }
+          },
+          "ListarPendientesLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ListarPendientesLambdaVersiontk5lyWtavaNIHI6TmD9IrMWI5jNxq8ZOL19JyA6uM"
+            },
+            "Export": {
+              "Name": "sls-pp-kitchen-dev-ListarPendientesLambdaFunctionQualifiedArn"
+            }
+          },
+          "EmitirStepCompletedLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "EmitirStepCompletedLambdaVersionD10WnWby21B0voEW9AQOhTKxy5oEicTYb6g2kGA"
+            },
+            "Export": {
+              "Name": "sls-pp-kitchen-dev-EmitirStepCompletedLambdaFunctionQualifiedArn"
+            }
+          },
+          "IniciarWorkflowLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "IniciarWorkflowLambdaVersionqm7OOQcvnesRAJHtvRC8D00FwIpoy1qnv37PqOQIE"
+            },
+            "Export": {
+              "Name": "sls-pp-kitchen-dev-IniciarWorkflowLambdaFunctionQualifiedArn"
+            }
+          },
+          "PpDashkitchenDashsmArn": {
+            "Description": "Current StateMachine Arn",
+            "Value": {
+              "Ref": "PpDashkitchenDashsm"
+            },
+            "Export": {
+              "Name": "sls-pp-kitchen-dev-PpDashkitchenDashsmArn"
+            }
+          },
+          "ServiceEndpoint": {
+            "Description": "URL of the service endpoint",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "https://",
+                  {
+                    "Ref": "ApiGatewayRestApi"
+                  },
+                  ".execute-api.",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix"
+                  },
+                  "/dev"
+                ]
+              ]
+            },
+            "Export": {
+              "Name": "sls-pp-kitchen-dev-ServiceEndpoint"
+            }
+          }
+        }
+      },
+      "vpc": {}
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "serviceRawFile": "service: pp-kitchen\n\nprovider:\n  name: aws\n  runtime: python3.12\n  region: us-east-1\n  iam:\n    role: arn:aws:iam::${aws:accountId}:role/LabRole\n  environment:\n    TASKS_TABLE: pp-tasks\n    EVENT_BUS_NAME: ${ssm:/pp/eventBusName}\n\nplugins:\n  - serverless-step-functions\n\ncustom:\n  stateMachineName: pp-kitchen-sm\n\nfunctions:\n\n  registrar:\n    handler: functions/registrar.handler\n\n  completar:\n    handler: functions/completar.handler\n    events:\n      - http:\n          path: tasks/completar\n          method: post\n          cors: true\n\n  listarPendientes:\n    handler: functions/listar_pendientes.handler\n    events:\n      - http:\n          path: tasks/pendientes\n          method: get\n          cors: true\n\n  emitirStepCompleted:\n    handler: functions/emitir_step_completed.handler\n\n  iniciarWorkflow:\n    handler: functions/iniciar_workflow.handler\n    environment:\n      STATE_MACHINE_ARN: !Sub \"arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm\"\n\nstepFunctions:\n  stateMachines:\n    kitchenWorkflow:\n      name: ${self:custom.stateMachineName}\n      role: arn:aws:iam::${aws:accountId}:role/LabRole\n      definition: ${file(./state-machine.asl.json)}\n\nresources:\n  Resources:\n\n    TasksTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: pp-tasks\n        BillingMode: PAY_PER_REQUEST\n        AttributeDefinitions:\n          - AttributeName: orderId\n            AttributeType: S\n          - AttributeName: estado\n            AttributeType: S\n        KeySchema:\n          - AttributeName: orderId\n            KeyType: HASH\n          - AttributeName: estado\n            KeyType: RANGE\n\n    KitchenSMParam:\n      Type: AWS::SSM::Parameter\n      Properties:\n        Name: /pp/kitchen-sm-arn\n        Type: String\n        Value: !Sub \"arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm\"\n\n    OrderCreatedRule:\n      Type: AWS::Events::Rule\n      Properties:\n        Name: pp-kitchen-order-created-rule\n        EventBusName: pp-bus\n        EventPattern:\n          source:\n            - pp.orders\n          detail-type:\n            - order.created\n        State: ENABLED\n        Targets:\n          - Id: IniciarWorkflowTarget\n            Arn: !GetAtt IniciarWorkflowLambdaFunction.Arn\n\n    OrderCreatedRulePermission:\n      Type: AWS::Lambda::Permission\n      Properties:\n        FunctionName: !GetAtt IniciarWorkflowLambdaFunction.Arn\n        Action: lambda:InvokeFunction\n        Principal: events.amazonaws.com\n        SourceArn: !GetAtt OrderCreatedRule.Arn\n",
+    "command": [
+      "deploy"
+    ],
+    "options": {},
+    "orgId": "38cf8bdc-f60a-47b2-b340-7b04117fb77c",
+    "orgName": "ae00n",
+    "userId": "jSHDhsSfPwqssWc5b6",
+    "userName": "ae00n",
+    "serviceProviderAwsAccountId": "048311469334",
+    "serviceProviderAwsCfStackName": "pp-kitchen-dev",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:048311469334:stack/pp-kitchen-dev/964c3880-724a-11f1-8c7c-0affeb4db1af",
+    "serviceProviderAwsCfStackCreated": "2026-06-27T17:06:50.139Z",
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": "CREATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "ListarPendientesLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-listarPendientes:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-pp-kitchen-dev-ListarPendientesLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "IniciarWorkflowLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-iniciarWorkflow:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-pp-kitchen-dev-IniciarWorkflowLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "PpDashkitchenDashsmArn",
+        "OutputValue": "arn:aws:states:us-east-1:048311469334:stateMachine:pp-kitchen-sm",
+        "Description": "Current StateMachine Arn",
+        "ExportName": "sls-pp-kitchen-dev-PpDashkitchenDashsmArn"
+      },
+      {
+        "OutputKey": "RegistrarLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-registrar:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-pp-kitchen-dev-RegistrarLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CompletarLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-completar:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-pp-kitchen-dev-CompletarLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "EmitirStepCompletedLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-emitirStepCompleted:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-pp-kitchen-dev-EmitirStepCompletedLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ServiceEndpoint",
+        "OutputValue": "https://pnj41nhlek.execute-api.us-east-1.amazonaws.com/dev",
+        "Description": "URL of the service endpoint",
+        "ExportName": "sls-pp-kitchen-dev-ServiceEndpoint"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+        "ExportName": "sls-pp-kitchen-dev-ServerlessDeploymentBucketName"
+      }
+    ],
+    "compiledCloudFormationTemplate": {
+      "AWSTemplateFormatVersion": "2010-09-09",
+      "Description": "The AWS CloudFormation template for this Serverless application",
+      "Resources": {
+        "RegistrarLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/pp-kitchen-dev-registrar"
+          }
+        },
+        "CompletarLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/pp-kitchen-dev-completar"
+          }
+        },
+        "ListarPendientesLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/pp-kitchen-dev-listarPendientes"
+          }
+        },
+        "EmitirStepCompletedLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/pp-kitchen-dev-emitirStepCompleted"
+          }
+        },
+        "IniciarWorkflowLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/pp-kitchen-dev-iniciarWorkflow"
+          }
+        },
+        "RegistrarLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+              "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+            },
+            "Handler": "functions/registrar.handler",
+            "Runtime": "python3.12",
+            "FunctionName": "pp-kitchen-dev-registrar",
+            "MemorySize": 1024,
+            "Timeout": 6,
+            "Environment": {
+              "Variables": {
+                "TASKS_TABLE": "pp-tasks",
+                "EVENT_BUS_NAME": "pp-bus"
+              }
+            },
+            "Role": "arn:aws:iam::048311469334:role/LabRole"
+          },
+          "DependsOn": [
+            "RegistrarLogGroup"
+          ]
+        },
+        "CompletarLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+              "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+            },
+            "Handler": "functions/completar.handler",
+            "Runtime": "python3.12",
+            "FunctionName": "pp-kitchen-dev-completar",
+            "MemorySize": 1024,
+            "Timeout": 6,
+            "Environment": {
+              "Variables": {
+                "TASKS_TABLE": "pp-tasks",
+                "EVENT_BUS_NAME": "pp-bus"
+              }
+            },
+            "Role": "arn:aws:iam::048311469334:role/LabRole"
+          },
+          "DependsOn": [
+            "CompletarLogGroup"
+          ]
+        },
+        "ListarPendientesLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+              "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+            },
+            "Handler": "functions/listar_pendientes.handler",
+            "Runtime": "python3.12",
+            "FunctionName": "pp-kitchen-dev-listarPendientes",
+            "MemorySize": 1024,
+            "Timeout": 6,
+            "Environment": {
+              "Variables": {
+                "TASKS_TABLE": "pp-tasks",
+                "EVENT_BUS_NAME": "pp-bus"
+              }
+            },
+            "Role": "arn:aws:iam::048311469334:role/LabRole"
+          },
+          "DependsOn": [
+            "ListarPendientesLogGroup"
+          ]
+        },
+        "EmitirStepCompletedLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+              "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+            },
+            "Handler": "functions/emitir_step_completed.handler",
+            "Runtime": "python3.12",
+            "FunctionName": "pp-kitchen-dev-emitirStepCompleted",
+            "MemorySize": 1024,
+            "Timeout": 6,
+            "Environment": {
+              "Variables": {
+                "TASKS_TABLE": "pp-tasks",
+                "EVENT_BUS_NAME": "pp-bus"
+              }
+            },
+            "Role": "arn:aws:iam::048311469334:role/LabRole"
+          },
+          "DependsOn": [
+            "EmitirStepCompletedLogGroup"
+          ]
+        },
+        "IniciarWorkflowLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+              "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+            },
+            "Handler": "functions/iniciar_workflow.handler",
+            "Runtime": "python3.12",
+            "FunctionName": "pp-kitchen-dev-iniciarWorkflow",
+            "MemorySize": 1024,
+            "Timeout": 6,
+            "Environment": {
+              "Variables": {
+                "TASKS_TABLE": "pp-tasks",
+                "EVENT_BUS_NAME": "pp-bus",
+                "STATE_MACHINE_ARN": {
+                  "Fn::Sub": "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+                }
+              }
+            },
+            "Role": "arn:aws:iam::048311469334:role/LabRole"
+          },
+          "DependsOn": [
+            "IniciarWorkflowLogGroup"
+          ]
+        },
+        "RegistrarLambdaVersion4V6BRV9RwQzNUkl48zGxeo00aqXDlxvHgLMgFuwwU": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "RegistrarLambdaFunction"
+            },
+            "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+          }
+        },
+        "CompletarLambdaVersiontxbZXWUCiiLDj9A7pqYhnGacjLGEMBpLLzXwKMGKc": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "CompletarLambdaFunction"
+            },
+            "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+          }
+        },
+        "ListarPendientesLambdaVersiontk5lyWtavaNIHI6TmD9IrMWI5jNxq8ZOL19JyA6uM": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "ListarPendientesLambdaFunction"
+            },
+            "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+          }
+        },
+        "EmitirStepCompletedLambdaVersionD10WnWby21B0voEW9AQOhTKxy5oEicTYb6g2kGA": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "EmitirStepCompletedLambdaFunction"
+            },
+            "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+          }
+        },
+        "IniciarWorkflowLambdaVersionqm7OOQcvnesRAJHtvRC8D00FwIpoy1qnv37PqOQIE": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "IniciarWorkflowLambdaFunction"
+            },
+            "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+          }
+        },
+        "PpDashkitchenDashsm": {
+          "Type": "AWS::StepFunctions::StateMachine",
+          "Properties": {
+            "DefinitionString": {
+              "Fn::Sub": [
+                "{\n  \"Comment\": \"Workflow de cocina Popeyes - pp-kitchen\",\n  \"StartAt\": \"RECIBIDO\",\n  \"States\": {\n    \"RECIBIDO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"RECIBIDO\"\n        }\n      },\n      \"Next\": \"EN_COCINA\",\n      \"ResultPath\": null\n    },\n    \"EN_COCINA\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_COCINA\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"EN_DESPACHO\",\n      \"HeartbeatSeconds\": 3600,\n      \"ResultPath\": null\n    },\n    \"EN_DESPACHO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_DESPACHO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"EN_REPARTO\",\n      \"HeartbeatSeconds\": 3600,\n      \"ResultPath\": null\n    },\n    \"EN_REPARTO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_REPARTO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"ENTREGADO\",\n      \"HeartbeatSeconds\": 7200,\n      \"ResultPath\": null\n    },\n    \"ENTREGADO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"ENTREGADO\"\n        }\n      },\n      \"End\": true,\n      \"ResultPath\": null\n    }\n  }\n}",
+                {
+                  "e2a6470b743c3ecee83b984ab90412c9": {
+                    "Fn::GetAtt": [
+                      "EmitirStepCompletedLambdaFunction",
+                      "Arn"
+                    ]
+                  },
+                  "d017b02987a60784aa244e16617956a7": {
+                    "Fn::GetAtt": [
+                      "RegistrarLambdaFunction",
+                      "Arn"
+                    ]
+                  }
+                }
+              ]
+            },
+            "RoleArn": "arn:aws:iam::048311469334:role/LabRole",
+            "StateMachineName": "pp-kitchen-sm"
+          },
+          "DependsOn": []
+        },
+        "ApiGatewayRestApi": {
+          "Type": "AWS::ApiGateway::RestApi",
+          "Properties": {
+            "Name": "dev-pp-kitchen",
+            "EndpointConfiguration": {
+              "Types": [
+                "EDGE"
+              ]
+            },
+            "Policy": ""
+          }
+        },
+        "ApiGatewayResourceTasks": {
+          "Type": "AWS::ApiGateway::Resource",
+          "Properties": {
+            "ParentId": {
+              "Fn::GetAtt": [
+                "ApiGatewayRestApi",
+                "RootResourceId"
+              ]
+            },
+            "PathPart": "tasks",
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            }
+          }
+        },
+        "ApiGatewayResourceTasksCompletar": {
+          "Type": "AWS::ApiGateway::Resource",
+          "Properties": {
+            "ParentId": {
+              "Ref": "ApiGatewayResourceTasks"
+            },
+            "PathPart": "completar",
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            }
+          }
+        },
+        "ApiGatewayResourceTasksPendientes": {
+          "Type": "AWS::ApiGateway::Resource",
+          "Properties": {
+            "ParentId": {
+              "Ref": "ApiGatewayResourceTasks"
+            },
+            "PathPart": "pendientes",
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            }
+          }
+        },
+        "ApiGatewayMethodTasksCompletarOptions": {
+          "Type": "AWS::ApiGateway::Method",
+          "Properties": {
+            "AuthorizationType": "NONE",
+            "HttpMethod": "OPTIONS",
+            "MethodResponses": [
+              {
+                "StatusCode": "200",
+                "ResponseParameters": {
+                  "method.response.header.Access-Control-Allow-Origin": true,
+                  "method.response.header.Access-Control-Allow-Headers": true,
+                  "method.response.header.Access-Control-Allow-Methods": true
+                },
+                "ResponseModels": {}
+              }
+            ],
+            "RequestParameters": {},
+            "Integration": {
+              "Type": "MOCK",
+              "RequestTemplates": {
+                "application/json": "{statusCode:200}"
+              },
+              "ContentHandling": "CONVERT_TO_TEXT",
+              "IntegrationResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": "'*'",
+                    "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                    "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                  },
+                  "ResponseTemplates": {
+                    "application/json": ""
+                  }
+                }
+              ]
+            },
+            "ResourceId": {
+              "Ref": "ApiGatewayResourceTasksCompletar"
+            },
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            }
+          }
+        },
+        "ApiGatewayMethodTasksPendientesOptions": {
+          "Type": "AWS::ApiGateway::Method",
+          "Properties": {
+            "AuthorizationType": "NONE",
+            "HttpMethod": "OPTIONS",
+            "MethodResponses": [
+              {
+                "StatusCode": "200",
+                "ResponseParameters": {
+                  "method.response.header.Access-Control-Allow-Origin": true,
+                  "method.response.header.Access-Control-Allow-Headers": true,
+                  "method.response.header.Access-Control-Allow-Methods": true
+                },
+                "ResponseModels": {}
+              }
+            ],
+            "RequestParameters": {},
+            "Integration": {
+              "Type": "MOCK",
+              "RequestTemplates": {
+                "application/json": "{statusCode:200}"
+              },
+              "ContentHandling": "CONVERT_TO_TEXT",
+              "IntegrationResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": "'*'",
+                    "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                    "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                  },
+                  "ResponseTemplates": {
+                    "application/json": ""
+                  }
+                }
+              ]
+            },
+            "ResourceId": {
+              "Ref": "ApiGatewayResourceTasksPendientes"
+            },
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            }
+          }
+        },
+        "ApiGatewayMethodTasksCompletarPost": {
+          "Type": "AWS::ApiGateway::Method",
+          "Properties": {
+            "HttpMethod": "POST",
+            "RequestParameters": {},
+            "ResourceId": {
+              "Ref": "ApiGatewayResourceTasksCompletar"
+            },
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            },
+            "ApiKeyRequired": "<REDACTED>",
+            "AuthorizationType": "NONE",
+            "Integration": {
+              "IntegrationHttpMethod": "POST",
+              "Type": "AWS_PROXY",
+              "Uri": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":apigateway:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":lambda:path/2015-03-31/functions/",
+                    {
+                      "Fn::GetAtt": [
+                        "CompletarLambdaFunction",
+                        "Arn"
+                      ]
+                    },
+                    "/invocations"
+                  ]
+                ]
+              }
+            },
+            "MethodResponses": []
+          },
+          "DependsOn": [
+            "CompletarLambdaPermissionApiGateway"
+          ]
+        },
+        "ApiGatewayMethodTasksPendientesGet": {
+          "Type": "AWS::ApiGateway::Method",
+          "Properties": {
+            "HttpMethod": "GET",
+            "RequestParameters": {},
+            "ResourceId": {
+              "Ref": "ApiGatewayResourceTasksPendientes"
+            },
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            },
+            "ApiKeyRequired": "<REDACTED>",
+            "AuthorizationType": "NONE",
+            "Integration": {
+              "IntegrationHttpMethod": "POST",
+              "Type": "AWS_PROXY",
+              "Uri": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":apigateway:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":lambda:path/2015-03-31/functions/",
+                    {
+                      "Fn::GetAtt": [
+                        "ListarPendientesLambdaFunction",
+                        "Arn"
+                      ]
+                    },
+                    "/invocations"
+                  ]
+                ]
+              }
+            },
+            "MethodResponses": []
+          },
+          "DependsOn": [
+            "ListarPendientesLambdaPermissionApiGateway"
+          ]
+        },
+        "ApiGatewayDeployment1782580002367": {
+          "Type": "AWS::ApiGateway::Deployment",
+          "Properties": {
+            "RestApiId": {
+              "Ref": "ApiGatewayRestApi"
+            },
+            "StageName": "dev"
+          },
+          "DependsOn": [
+            "ApiGatewayMethodTasksCompletarOptions",
+            "ApiGatewayMethodTasksPendientesOptions",
+            "ApiGatewayMethodTasksCompletarPost",
+            "ApiGatewayMethodTasksPendientesGet"
+          ]
+        },
+        "CompletarLambdaPermissionApiGateway": {
+          "Type": "AWS::Lambda::Permission",
+          "Properties": {
+            "FunctionName": {
+              "Fn::GetAtt": [
+                "CompletarLambdaFunction",
+                "Arn"
+              ]
+            },
+            "Action": "lambda:InvokeFunction",
+            "Principal": "apigateway.amazonaws.com",
+            "SourceArn": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition"
+                  },
+                  ":execute-api:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":",
+                  {
+                    "Ref": "ApiGatewayRestApi"
+                  },
+                  "/*/*"
+                ]
+              ]
+            }
+          }
+        },
+        "ListarPendientesLambdaPermissionApiGateway": {
+          "Type": "AWS::Lambda::Permission",
+          "Properties": {
+            "FunctionName": {
+              "Fn::GetAtt": [
+                "ListarPendientesLambdaFunction",
+                "Arn"
+              ]
+            },
+            "Action": "lambda:InvokeFunction",
+            "Principal": "apigateway.amazonaws.com",
+            "SourceArn": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition"
+                  },
+                  ":execute-api:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":",
+                  {
+                    "Ref": "ApiGatewayRestApi"
+                  },
+                  "/*/*"
+                ]
+              ]
+            }
+          }
+        },
+        "TasksTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "pp-tasks",
+            "BillingMode": "PAY_PER_REQUEST",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "orderId",
+                "AttributeType": "S"
+              },
+              {
+                "AttributeName": "estado",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "orderId",
+                "KeyType": "HASH"
+              },
+              {
+                "AttributeName": "estado",
+                "KeyType": "RANGE"
+              }
+            ]
+          }
+        },
+        "KitchenSMParam": {
+          "Type": "AWS::SSM::Parameter",
+          "Properties": {
+            "Name": "/pp/kitchen-sm-arn",
+            "Type": "String",
+            "Value": {
+              "Fn::Sub": "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+            }
+          }
+        },
+        "OrderCreatedRule": {
+          "Type": "AWS::Events::Rule",
+          "Properties": {
+            "Name": "pp-kitchen-order-created-rule",
+            "EventBusName": "pp-bus",
+            "EventPattern": {
+              "source": [
+                "pp.orders"
+              ],
+              "detail-type": [
+                "order.created"
+              ]
+            },
+            "State": "ENABLED",
+            "Targets": [
+              {
+                "Id": "IniciarWorkflowTarget",
+                "Arn": {
+                  "Fn::GetAtt": [
+                    "IniciarWorkflowLambdaFunction",
+                    "Arn"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "OrderCreatedRulePermission": {
+          "Type": "AWS::Lambda::Permission",
+          "Properties": {
+            "FunctionName": {
+              "Fn::GetAtt": [
+                "IniciarWorkflowLambdaFunction",
+                "Arn"
+              ]
+            },
+            "Action": "lambda:InvokeFunction",
+            "Principal": "events.amazonaws.com",
+            "SourceArn": {
+              "Fn::GetAtt": [
+                "OrderCreatedRule",
+                "Arn"
+              ]
+            }
+          }
+        }
+      },
+      "Outputs": {
+        "ServerlessDeploymentBucketName": {
+          "Value": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
+          "Export": {
+            "Name": "sls-pp-kitchen-dev-ServerlessDeploymentBucketName"
+          }
+        },
+        "RegistrarLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "RegistrarLambdaVersion4V6BRV9RwQzNUkl48zGxeo00aqXDlxvHgLMgFuwwU"
+          },
+          "Export": {
+            "Name": "sls-pp-kitchen-dev-RegistrarLambdaFunctionQualifiedArn"
+          }
+        },
+        "CompletarLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "CompletarLambdaVersiontxbZXWUCiiLDj9A7pqYhnGacjLGEMBpLLzXwKMGKc"
+          },
+          "Export": {
+            "Name": "sls-pp-kitchen-dev-CompletarLambdaFunctionQualifiedArn"
+          }
+        },
+        "ListarPendientesLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "ListarPendientesLambdaVersiontk5lyWtavaNIHI6TmD9IrMWI5jNxq8ZOL19JyA6uM"
+          },
+          "Export": {
+            "Name": "sls-pp-kitchen-dev-ListarPendientesLambdaFunctionQualifiedArn"
+          }
+        },
+        "EmitirStepCompletedLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "EmitirStepCompletedLambdaVersionD10WnWby21B0voEW9AQOhTKxy5oEicTYb6g2kGA"
+          },
+          "Export": {
+            "Name": "sls-pp-kitchen-dev-EmitirStepCompletedLambdaFunctionQualifiedArn"
+          }
+        },
+        "IniciarWorkflowLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "IniciarWorkflowLambdaVersionqm7OOQcvnesRAJHtvRC8D00FwIpoy1qnv37PqOQIE"
+          },
+          "Export": {
+            "Name": "sls-pp-kitchen-dev-IniciarWorkflowLambdaFunctionQualifiedArn"
+          }
+        },
+        "PpDashkitchenDashsmArn": {
+          "Description": "Current StateMachine Arn",
+          "Value": {
+            "Ref": "PpDashkitchenDashsm"
+          },
+          "Export": {
+            "Name": "sls-pp-kitchen-dev-PpDashkitchenDashsmArn"
+          }
+        },
+        "ServiceEndpoint": {
+          "Description": "URL of the service endpoint",
+          "Value": {
+            "Fn::Join": [
+              "",
+              [
+                "https://",
+                {
+                  "Ref": "ApiGatewayRestApi"
+                },
+                ".execute-api.",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ".",
+                {
+                  "Ref": "AWS::URLSuffix"
+                },
+                "/dev"
+              ]
+            ]
+          },
+          "Export": {
+            "Name": "sls-pp-kitchen-dev-ServiceEndpoint"
+          }
+        }
+      }
+    }
+  }
+}

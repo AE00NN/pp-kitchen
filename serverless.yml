@@ -1,0 +1,102 @@
+service: pp-kitchen
+
+provider:
+  name: aws
+  runtime: python3.12
+  region: us-east-1
+  iam:
+    role: arn:aws:iam::${aws:accountId}:role/LabRole
+  environment:
+    TASKS_TABLE: pp-tasks
+    EVENT_BUS_NAME: ${ssm:/pp/eventBusName}
+
+plugins:
+  - serverless-step-functions
+
+custom:
+  stateMachineName: pp-kitchen-sm
+
+functions:
+
+  registrar:
+    handler: functions/registrar.handler
+
+  completar:
+    handler: functions/completar.handler
+    events:
+      - http:
+          path: tasks/completar
+          method: post
+          cors: true
+
+  listarPendientes:
+    handler: functions/listar_pendientes.handler
+    events:
+      - http:
+          path: tasks/pendientes
+          method: get
+          cors: true
+
+  emitirStepCompleted:
+    handler: functions/emitir_step_completed.handler
+
+  iniciarWorkflow:
+    handler: functions/iniciar_workflow.handler
+    environment:
+      STATE_MACHINE_ARN: !Sub "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+
+stepFunctions:
+  stateMachines:
+    kitchenWorkflow:
+      name: ${self:custom.stateMachineName}
+      role: arn:aws:iam::${aws:accountId}:role/LabRole
+      definition: ${file(./state-machine.asl.json)}
+
+resources:
+  Resources:
+
+    TasksTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: pp-tasks
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: orderId
+            AttributeType: S
+          - AttributeName: estado
+            AttributeType: S
+        KeySchema:
+          - AttributeName: orderId
+            KeyType: HASH
+          - AttributeName: estado
+            KeyType: RANGE
+
+    KitchenSMParam:
+      Type: AWS::SSM::Parameter
+      Properties:
+        Name: /pp/kitchen-sm-arn
+        Type: String
+        Value: !Sub "arn:aws:states:${AWS::Region}:${AWS::AccountId}:stateMachine:pp-kitchen-sm"
+
+    OrderCreatedRule:
+      Type: AWS::Events::Rule
+      Properties:
+        Name: pp-kitchen-order-created-rule
+        EventBusName: pp-bus
+        EventPattern:
+          source:
+            - pp.orders
+          detail-type:
+            - order.created
+        State: ENABLED
+        Targets:
+          - Id: IniciarWorkflowTarget
+            Arn: !GetAtt IniciarWorkflowLambdaFunction.Arn
+
+    OrderCreatedRulePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: !GetAtt IniciarWorkflowLambdaFunction.Arn
+        Action: lambda:InvokeFunction
+        Principal: events.amazonaws.com
+        SourceArn: !GetAtt OrderCreatedRule.Arn

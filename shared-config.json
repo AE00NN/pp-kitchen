@@ -1,0 +1,70 @@
+{
+  "proyecto": "popeyes-pedidos-cs2032",
+  "region": "us-east-1",
+  "labRoleArn": "arn:aws:iam::${aws:accountId}:role/LabRole",
+  "prefijo": "pp",
+
+  "cognito": {
+    "userPoolName": "pp-user-pool",
+    "atributoTenant": "custom:tenant_id",
+    "grupos": ["cliente", "cocinero", "despachador", "repartidor"],
+    "ssm": {
+      "userPoolId": "/pp/userPoolId",
+      "userPoolClientId": "/pp/userPoolClientId"
+    }
+  },
+
+  "eventBus": {
+    "name": "pp-bus",
+    "ssm": "/pp/eventBusName"
+  },
+
+  "eventos": {
+    "order.created": {
+      "source": "pp.orders",
+      "detail": {
+        "tenantId": "string",
+        "orderId": "string",
+        "origin": "web | rappi",
+        "items": "array",
+        "createdAt": "ISO-8601"
+      }
+    },
+    "step.completed": {
+      "source": "pp.kitchen",
+      "detail": {
+        "tenantId": "string",
+        "orderId": "string",
+        "step": "EN_COCINA | EN_DESPACHO | EN_REPARTO",
+        "workerId": "string",
+        "startedAt": "ISO-8601",
+        "endedAt": "ISO-8601"
+      }
+    }
+  },
+
+  "estadosPedido": [
+    "RECIBIDO",
+    "EN_COCINA",
+    "EN_DESPACHO",
+    "EN_REPARTO",
+    "ENTREGADO"
+  ],
+
+  "pasosHumanos": ["EN_COCINA", "EN_DESPACHO", "EN_REPARTO"],
+
+  "crossCloud": {
+    "descripcion": "AWS <-> OCI por HTTPS + API key. Sin IAM.",
+    "headerApiKey": "x-api-key",
+    "ociApi1TriggerUrl": "PENDIENTE_RELLENAR_INT3",
+    "ociApi2StatusUrl": "PENDIENTE_RELLENAR_INT3"
+  },
+
+  "deployedIds": {
+    "_nota": "Se rellena tras desplegar en la cuenta demo",
+    "ordersApiUrl": "PENDIENTE",
+    "kitchenApiUrl": "PENDIENTE",
+    "userPoolId": "PENDIENTE",
+    "userPoolClientId": "PENDIENTE"
+  }
+}

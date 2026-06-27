@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Popeyes Brand Kit · Demo</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="popeyes-kit.css">
+</head>
+<body class="pp-app">
+
+  <!-- Header -->
+  <header class="pp-header">
+    <a class="pp-logo" href="#">
+      <span class="pp-logo__mark">🍗</span>
+      <span class="pp-logo__name">POPEYES</span>
+    </a>
+    <nav class="pp-header__nav">
+      <a href="#">Menú</a>
+      <a href="#">Mi pedido</a>
+      <a href="#">Seguimiento</a>
+    </nav>
+    <button class="pp-btn pp-btn--primary">🛒 Carrito (2)</button>
+  </header>
+
+  <!-- Hero -->
+  <section class="pp-hero">
+    <h1 class="pp-h1">El sabor de Louisiana, a un clic</h1>
+    <p>Pide tu pollo crocante y síguelo en tiempo real.</p>
+  </section>
+
+  <main class="pp-container">
+
+    <!-- Catálogo (app Cliente) -->
+    <div class="pp-section-title"><h2 class="pp-h2">Catálogo</h2></div>
+    <div class="pp-grid">
+      <article class="pp-card">
+        <div class="pp-card__img">🍗</div>
+        <div class="pp-card__body">
+          <div class="pp-card__name">Combo 2 Presas</div>
+          <div class="pp-card__desc">2 presas de pollo, papas y bebida</div>
+          <div class="pp-card__foot"><span class="pp-price">S/ 18.90</span><button class="pp-btn pp-btn--primary">Agregar</button></div>
+        </div>
+      </article>
+      <article class="pp-card">
+        <div class="pp-card__img">🍔</div>
+        <div class="pp-card__body">
+          <div class="pp-card__name">Sándwich Picante</div>
+          <div class="pp-card__desc">Filete crocante con salsa picante</div>
+          <div class="pp-card__foot"><span class="pp-price">S/ 14.90</span><button class="pp-btn pp-btn--primary">Agregar</button></div>
+        </div>
+      </article>
+      <article class="pp-card">
+        <div class="pp-card__img">🍟</div>
+        <div class="pp-card__body">
+          <div class="pp-card__name">Papas Cajún</div>
+          <div class="pp-card__desc">Papas sazonadas estilo Louisiana</div>
+          <div class="pp-card__foot"><span class="pp-price">S/ 7.50</span><button class="pp-btn pp-btn--primary">Agregar</button></div>
+        </div>
+      </article>
+      <article class="pp-card">
+        <div class="pp-card__img">🥤</div>
+        <div class="pp-card__body">
+          <div class="pp-card__name">Gaseosa 500ml</div>
+          <div class="pp-card__desc">Bebida gaseosa a elección</div>
+          <div class="pp-card__foot"><span class="pp-price">S/ 5.50</span><button class="pp-btn pp-btn--primary">Agregar</button></div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Estados del pedido -->
+    <div class="pp-section-title" style="margin-top:var(--pp-sp-8)"><h2 class="pp-h2">Estados del pedido</h2></div>
+    <div style="display:flex; gap:var(--pp-sp-3); flex-wrap:wrap;">
+      <span class="pp-pill pp-pill--recibido">Recibido</span>
+      <span class="pp-pill pp-pill--cocina">En cocina</span>
+      <span class="pp-pill pp-pill--despacho">En despacho</span>
+      <span class="pp-pill pp-pill--reparto">En reparto</span>
+      <span class="pp-pill pp-pill--entregado">Entregado</span>
+    </div>
+
+    <!-- Vista trabajador -->
+    <div class="pp-section-title" style="margin-top:var(--pp-sp-8)"><h2 class="pp-h2">Vista Trabajadores</h2></div>
+    <table class="pp-table">
+      <thead>
+        <tr><th>Pedido</th><th>Tienda</th><th>Estado</th><th>Atiende</th><th>Acción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>#1042</td><td>lima01</td><td><span class="pp-pill pp-pill--cocina">En cocina</span></td><td>cocinero1</td><td><button class="pp-btn pp-btn--secondary">Marcar listo</button></td></tr>
+        <tr><td>#1043</td><td>lima01</td><td><span class="pp-pill pp-pill--recibido">Recibido</span></td><td>—</td><td><button class="pp-btn pp-btn--ghost">Tomar</button></td></tr>
+        <tr><td>#1041</td><td>lima02</td><td><span class="pp-pill pp-pill--reparto">En reparto</span></td><td>repartidor1</td><td><button class="pp-btn pp-btn--secondary">Marcar entregado</button></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Botones -->
+    <div class="pp-section-title" style="margin-top:var(--pp-sp-8)"><h2 class="pp-h2">Botones</h2></div>
+    <div style="display:flex; gap:var(--pp-sp-3); flex-wrap:wrap;">
+      <button class="pp-btn pp-btn--primary">Primario</button>
+      <button class="pp-btn pp-btn--secondary">Secundario</button>
+      <button class="pp-btn pp-btn--ghost">Ghost</button>
+    </div>
+
+  </main>
+
+  <footer class="pp-footer">Popeyes · Proyecto académico CS2032 — UTEC · Grupo 4</footer>
+
+</body>
+</html>
