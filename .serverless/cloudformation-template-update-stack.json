@@ -37,7 +37,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-          "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+          "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
         },
         "Handler": "functions/registrar.handler",
         "Runtime": "python3.12",
@@ -61,7 +61,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-          "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+          "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
         },
         "Handler": "functions/completar.handler",
         "Runtime": "python3.12",
@@ -85,7 +85,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-          "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+          "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
         },
         "Handler": "functions/listar_pendientes.handler",
         "Runtime": "python3.12",
@@ -109,7 +109,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-          "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+          "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
         },
         "Handler": "functions/emitir_step_completed.handler",
         "Runtime": "python3.12",
@@ -133,7 +133,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-          "S3Key": "serverless/pp-kitchen/dev/1782580008604-2026-06-27T17:06:48.604Z/pp-kitchen.zip"
+          "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
         },
         "Handler": "functions/iniciar_workflow.handler",
         "Runtime": "python3.12",
@@ -155,54 +155,54 @@
         "IniciarWorkflowLogGroup"
       ]
     },
-    "RegistrarLambdaVersion4V6BRV9RwQzNUkl48zGxeo00aqXDlxvHgLMgFuwwU": {
+    "RegistrarLambdaVersionXOH6uqb1eouZY7t2KroDSQOLQpOJTlPKFyfo0AJK0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "RegistrarLambdaFunction"
         },
-        "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+        "CodeSha256": "z3Hz2kp+GTr7bCtq3eyDzzKYAxBJD8+MaMq9YIg9vuw="
       }
     },
-    "CompletarLambdaVersiontxbZXWUCiiLDj9A7pqYhnGacjLGEMBpLLzXwKMGKc": {
+    "CompletarLambdaVersionmgcfpUizG70Y313567fMvRRa6fw6jHKbjL3wTGlZmPE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CompletarLambdaFunction"
         },
-        "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+        "CodeSha256": "z3Hz2kp+GTr7bCtq3eyDzzKYAxBJD8+MaMq9YIg9vuw="
       }
     },
-    "ListarPendientesLambdaVersiontk5lyWtavaNIHI6TmD9IrMWI5jNxq8ZOL19JyA6uM": {
+    "ListarPendientesLambdaVersionctioJh8blDN71WfN5OEs1s3bUWxgb1wsyeEVR8S0soY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ListarPendientesLambdaFunction"
         },
-        "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+        "CodeSha256": "z3Hz2kp+GTr7bCtq3eyDzzKYAxBJD8+MaMq9YIg9vuw="
       }
     },
-    "EmitirStepCompletedLambdaVersionD10WnWby21B0voEW9AQOhTKxy5oEicTYb6g2kGA": {
+    "EmitirStepCompletedLambdaVersionBnsq6xJl2qZbm8nbZaMxq8eIvTgE6BxnrMus8GAZls": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EmitirStepCompletedLambdaFunction"
         },
-        "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+        "CodeSha256": "z3Hz2kp+GTr7bCtq3eyDzzKYAxBJD8+MaMq9YIg9vuw="
       }
     },
-    "IniciarWorkflowLambdaVersionqm7OOQcvnesRAJHtvRC8D00FwIpoy1qnv37PqOQIE": {
+    "IniciarWorkflowLambdaVersionb7RbrIUX0tFMRTvDDVxVJcufK0war3ngTxF8mxbbU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "IniciarWorkflowLambdaFunction"
         },
-        "CodeSha256": "5j605Svummb0rxMWAOckDmTX0Z7PEQe7TlV9GYPFqf8="
+        "CodeSha256": "z3Hz2kp+GTr7bCtq3eyDzzKYAxBJD8+MaMq9YIg9vuw="
       }
     },
     "PpDashkitchenDashsm": {
@@ -210,7 +210,7 @@
       "Properties": {
         "DefinitionString": {
           "Fn::Sub": [
-            "{\n  \"Comment\": \"Workflow de cocina Popeyes - pp-kitchen\",\n  \"StartAt\": \"RECIBIDO\",\n  \"States\": {\n    \"RECIBIDO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"RECIBIDO\"\n        }\n      },\n      \"Next\": \"EN_COCINA\",\n      \"ResultPath\": null\n    },\n    \"EN_COCINA\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_COCINA\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"EN_DESPACHO\",\n      \"HeartbeatSeconds\": 3600,\n      \"ResultPath\": null\n    },\n    \"EN_DESPACHO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_DESPACHO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"EN_REPARTO\",\n      \"HeartbeatSeconds\": 3600,\n      \"ResultPath\": null\n    },\n    \"EN_REPARTO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"EN_REPARTO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Next\": \"ENTREGADO\",\n      \"HeartbeatSeconds\": 7200,\n      \"ResultPath\": null\n    },\n    \"ENTREGADO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"estado\": \"ENTREGADO\"\n        }\n      },\n      \"End\": true,\n      \"ResultPath\": null\n    }\n  }\n}",
+            "{\n  \"Comment\": \"pp-kitchen v3 — workflow enriquecido con Choice, Parallel, Wait, Retry, Catch\",\n  \"StartAt\": \"ValidarPedido\",\n  \"States\": {\n    \"ValidarPedido\": {\n      \"Type\": \"Choice\",\n      \"Choices\": [\n        {\n          \"Variable\": \"$.orderId\",\n          \"IsPresent\": true,\n          \"Next\": \"RegistrarRecepcion\"\n        }\n      ],\n      \"Default\": \"PedidoInvalido\"\n    },\n    \"PedidoInvalido\": {\n      \"Type\": \"Fail\",\n      \"Error\": \"PedidoInvalido\",\n      \"Cause\": \"El pedido no tiene orderId\"\n    },\n    \"RegistrarRecepcion\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"RECIBIDO\"\n        }\n      },\n      \"Retry\": [\n        {\n          \"ErrorEquals\": [\n            \"Lambda.ServiceException\",\n            \"Lambda.AWSLambdaException\"\n          ],\n          \"IntervalSeconds\": 2,\n          \"MaxAttempts\": 3,\n          \"BackoffRate\": 2\n        }\n      ],\n      \"Catch\": [\n        {\n          \"ErrorEquals\": [\n            \"States.ALL\"\n          ],\n          \"Next\": \"ErrorGeneral\",\n          \"ResultPath\": \"$.error\"\n        }\n      ],\n      \"Next\": \"PreparacionParalela\",\n      \"ResultPath\": null\n    },\n    \"PreparacionParalela\": {\n      \"Type\": \"Parallel\",\n      \"Branches\": [\n        {\n          \"StartAt\": \"NotificarCocina\",\n          \"States\": {\n            \"NotificarCocina\": {\n              \"Type\": \"Wait\",\n              \"Seconds\": 2,\n              \"Next\": \"CocinaLista\"\n            },\n            \"CocinaLista\": {\n              \"Type\": \"Pass\",\n              \"Result\": {\n                \"preparacion\": \"cocina_lista\"\n              },\n              \"End\": true\n            }\n          }\n        },\n        {\n          \"StartAt\": \"NotificarAlmacen\",\n          \"States\": {\n            \"NotificarAlmacen\": {\n              \"Type\": \"Wait\",\n              \"Seconds\": 1,\n              \"Next\": \"AlmacenListo\"\n            },\n            \"AlmacenListo\": {\n              \"Type\": \"Pass\",\n              \"Result\": {\n                \"preparacion\": \"almacen_listo\"\n              },\n              \"End\": true\n            }\n          }\n        }\n      ],\n      \"Next\": \"EN_COCINA\",\n      \"ResultPath\": null\n    },\n    \"EN_COCINA\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"EN_COCINA\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Retry\": [\n        {\n          \"ErrorEquals\": [\n            \"Lambda.ServiceException\"\n          ],\n          \"IntervalSeconds\": 2,\n          \"MaxAttempts\": 2,\n          \"BackoffRate\": 2\n        }\n      ],\n      \"Catch\": [\n        {\n          \"ErrorEquals\": [\n            \"States.HeartbeatTimeout\"\n          ],\n          \"Next\": \"TimeoutCocina\",\n          \"ResultPath\": \"$.error\"\n        },\n        {\n          \"ErrorEquals\": [\n            \"States.ALL\"\n          ],\n          \"Next\": \"ErrorGeneral\",\n          \"ResultPath\": \"$.error\"\n        }\n      ],\n      \"HeartbeatSeconds\": 3600,\n      \"Next\": \"EmitirCocinaCompleta\",\n      \"ResultPath\": null\n    },\n    \"TimeoutCocina\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"TIMEOUT_COCINA\"\n        }\n      },\n      \"Next\": \"EN_COCINA\",\n      \"ResultPath\": null\n    },\n    \"EmitirCocinaCompleta\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"EN_COCINA\"\n        }\n      },\n      \"Retry\": [\n        {\n          \"ErrorEquals\": [\n            \"States.ALL\"\n          ],\n          \"IntervalSeconds\": 2,\n          \"MaxAttempts\": 3,\n          \"BackoffRate\": 2\n        }\n      ],\n      \"Catch\": [\n        {\n          \"ErrorEquals\": [\n            \"States.ALL\"\n          ],\n          \"Next\": \"ErrorGeneral\",\n          \"ResultPath\": \"$.error\"\n        }\n      ],\n      \"Next\": \"VerificarStockDespacho\",\n      \"ResultPath\": null\n    },\n    \"VerificarStockDespacho\": {\n      \"Type\": \"Choice\",\n      \"Choices\": [\n        {\n          \"Variable\": \"$.workerId\",\n          \"IsPresent\": true,\n          \"Next\": \"EN_DESPACHO\"\n        }\n      ],\n      \"Default\": \"AsignarWorkerDefault\"\n    },\n    \"AsignarWorkerDefault\": {\n      \"Type\": \"Pass\",\n      \"Result\": {\n        \"workerId\": \"worker-default\"\n      },\n      \"ResultPath\": \"$.workerAsignado\",\n      \"Next\": \"EN_DESPACHO\"\n    },\n    \"EN_DESPACHO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"EN_DESPACHO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Retry\": [\n        {\n          \"ErrorEquals\": [\n            \"Lambda.ServiceException\"\n          ],\n          \"IntervalSeconds\": 2,\n          \"MaxAttempts\": 2,\n          \"BackoffRate\": 2\n        }\n      ],\n      \"Catch\": [\n        {\n          \"ErrorEquals\": [\n            \"States.HeartbeatTimeout\"\n          ],\n          \"Next\": \"TimeoutDespacho\",\n          \"ResultPath\": \"$.error\"\n        },\n        {\n          \"ErrorEquals\": [\n            \"States.ALL\"\n          ],\n          \"Next\": \"ErrorGeneral\",\n          \"ResultPath\": \"$.error\"\n        }\n      ],\n      \"HeartbeatSeconds\": 3600,\n      \"Next\": \"EmitirDespachoCompleto\",\n      \"ResultPath\": null\n    },\n    \"TimeoutDespacho\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"TIMEOUT_DESPACHO\"\n        }\n      },\n      \"Next\": \"EN_DESPACHO\",\n      \"ResultPath\": null\n    },\n    \"EmitirDespachoCompleto\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"EN_DESPACHO\"\n        }\n      },\n      \"Retry\": [\n        {\n          \"ErrorEquals\": [\n            \"States.ALL\"\n          ],\n          \"IntervalSeconds\": 2,\n          \"MaxAttempts\": 3,\n          \"BackoffRate\": 2\n        }\n      ],\n      \"Catch\": [\n        {\n          \"ErrorEquals\": [\n            \"States.ALL\"\n          ],\n          \"Next\": \"ErrorGeneral\",\n          \"ResultPath\": \"$.error\"\n        }\n      ],\n      \"Next\": \"EN_REPARTO\",\n      \"ResultPath\": null\n    },\n    \"EN_REPARTO\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke.waitForTaskToken\",\n      \"Parameters\": {\n        \"FunctionName\": \"${d017b02987a60784aa244e16617956a7}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"EN_REPARTO\",\n          \"workerId.$\": \"$.workerId\",\n          \"taskToken.$\": \"$$.Task.Token\"\n        }\n      },\n      \"Retry\": [\n        {\n          \"ErrorEquals\": [\n            \"Lambda.ServiceException\"\n          ],\n          \"IntervalSeconds\": 2,\n          \"MaxAttempts\": 2,\n          \"BackoffRate\": 2\n        }\n      ],\n      \"Catch\": [\n        {\n          \"ErrorEquals\": [\n            \"States.HeartbeatTimeout\"\n          ],\n          \"Next\": \"TimeoutReparto\",\n          \"ResultPath\": \"$.error\"\n        },\n        {\n          \"ErrorEquals\": [\n            \"States.ALL\"\n          ],\n          \"Next\": \"ErrorGeneral\",\n          \"ResultPath\": \"$.error\"\n        }\n      ],\n      \"HeartbeatSeconds\": 7200,\n      \"Next\": \"EmitirRepartoCompleto\",\n      \"ResultPath\": null\n    },\n    \"TimeoutReparto\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"TIMEOUT_REPARTO\"\n        }\n      },\n      \"Next\": \"EN_REPARTO\",\n      \"ResultPath\": null\n    },\n    \"EmitirRepartoCompleto\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"EN_REPARTO\"\n        }\n      },\n      \"Next\": \"FinalizarEntrega\",\n      \"ResultPath\": null\n    },\n    \"FinalizarEntrega\": {\n      \"Type\": \"Parallel\",\n      \"Branches\": [\n        {\n          \"StartAt\": \"RegistrarEntrega\",\n          \"States\": {\n            \"RegistrarEntrega\": {\n              \"Type\": \"Task\",\n              \"Resource\": \"arn:aws:states:::lambda:invoke\",\n              \"Parameters\": {\n                \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n                \"Payload\": {\n                  \"orderId.$\": \"$.orderId\",\n                  \"tenantId.$\": \"$.tenantId\",\n                  \"estado\": \"ENTREGADO\"\n                }\n              },\n              \"End\": true,\n              \"ResultPath\": null\n            }\n          }\n        },\n        {\n          \"StartAt\": \"EsperarConfirmacion\",\n          \"States\": {\n            \"EsperarConfirmacion\": {\n              \"Type\": \"Wait\",\n              \"Seconds\": 3,\n              \"Next\": \"EntregaConfirmada\"\n            },\n            \"EntregaConfirmada\": {\n              \"Type\": \"Pass\",\n              \"Result\": {\n                \"confirmacion\": \"ok\"\n              },\n              \"End\": true\n            }\n          }\n        }\n      ],\n      \"Next\": \"ENTREGADO\",\n      \"ResultPath\": null\n    },\n    \"ENTREGADO\": {\n      \"Type\": \"Succeed\"\n    },\n    \"ErrorGeneral\": {\n      \"Type\": \"Task\",\n      \"Resource\": \"arn:aws:states:::lambda:invoke\",\n      \"Parameters\": {\n        \"FunctionName\": \"${e2a6470b743c3ecee83b984ab90412c9}\",\n        \"Payload\": {\n          \"orderId.$\": \"$.orderId\",\n          \"tenantId.$\": \"$.tenantId\",\n          \"estado\": \"ERROR\"\n        }\n      },\n      \"Next\": \"FalloCritico\",\n      \"ResultPath\": null\n    },\n    \"FalloCritico\": {\n      \"Type\": \"Fail\",\n      \"Error\": \"ErrorCritico\",\n      \"Cause\": \"El workflow encontró un error irrecuperable\"\n    }\n  }\n}",
             {
               "e2a6470b743c3ecee83b984ab90412c9": {
                 "Fn::GetAtt": [
@@ -465,7 +465,7 @@
         "ListarPendientesLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1782580002367": {
+    "ApiGatewayDeployment1783622079134": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -648,7 +648,7 @@
     "RegistrarLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "RegistrarLambdaVersion4V6BRV9RwQzNUkl48zGxeo00aqXDlxvHgLMgFuwwU"
+        "Ref": "RegistrarLambdaVersionXOH6uqb1eouZY7t2KroDSQOLQpOJTlPKFyfo0AJK0"
       },
       "Export": {
         "Name": "sls-pp-kitchen-dev-RegistrarLambdaFunctionQualifiedArn"
@@ -657,7 +657,7 @@
     "CompletarLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CompletarLambdaVersiontxbZXWUCiiLDj9A7pqYhnGacjLGEMBpLLzXwKMGKc"
+        "Ref": "CompletarLambdaVersionmgcfpUizG70Y313567fMvRRa6fw6jHKbjL3wTGlZmPE"
       },
       "Export": {
         "Name": "sls-pp-kitchen-dev-CompletarLambdaFunctionQualifiedArn"
@@ -666,7 +666,7 @@
     "ListarPendientesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ListarPendientesLambdaVersiontk5lyWtavaNIHI6TmD9IrMWI5jNxq8ZOL19JyA6uM"
+        "Ref": "ListarPendientesLambdaVersionctioJh8blDN71WfN5OEs1s3bUWxgb1wsyeEVR8S0soY"
       },
       "Export": {
         "Name": "sls-pp-kitchen-dev-ListarPendientesLambdaFunctionQualifiedArn"
@@ -675,7 +675,7 @@
     "EmitirStepCompletedLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EmitirStepCompletedLambdaVersionD10WnWby21B0voEW9AQOhTKxy5oEicTYb6g2kGA"
+        "Ref": "EmitirStepCompletedLambdaVersionBnsq6xJl2qZbm8nbZaMxq8eIvTgE6BxnrMus8GAZls"
       },
       "Export": {
         "Name": "sls-pp-kitchen-dev-EmitirStepCompletedLambdaFunctionQualifiedArn"
@@ -684,7 +684,7 @@
     "IniciarWorkflowLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "IniciarWorkflowLambdaVersionqm7OOQcvnesRAJHtvRC8D00FwIpoy1qnv37PqOQIE"
+        "Ref": "IniciarWorkflowLambdaVersionb7RbrIUX0tFMRTvDDVxVJcufK0war3ngTxF8mxbbU"
       },
       "Export": {
         "Name": "sls-pp-kitchen-dev-IniciarWorkflowLambdaFunctionQualifiedArn"
