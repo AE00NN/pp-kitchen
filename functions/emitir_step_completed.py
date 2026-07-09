@@ -11,6 +11,7 @@ def handler(event, context):
         'EventBusName': EVENT_BUS,
         'Detail': json.dumps({
             'orderId':   event['orderId'],
+            'tenantId':  event.get('tenantId', 'default'),
             'estado':    event['estado'],
             'timestamp': datetime.now(timezone.utc).isoformat(),
             'origin':    'pp-kitchen'

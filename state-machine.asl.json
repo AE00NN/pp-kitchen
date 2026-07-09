@@ -1,20 +1,94 @@
 {
-  "Comment": "Workflow de cocina Popeyes - pp-kitchen",
-  "StartAt": "RECIBIDO",
+  "Comment": "pp-kitchen v3 — workflow enriquecido con Choice, Parallel, Wait, Retry, Catch",
+  "StartAt": "ValidarPedido",
   "States": {
-    "RECIBIDO": {
+
+    "ValidarPedido": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.orderId",
+          "IsPresent": true,
+          "Next": "RegistrarRecepcion"
+        }
+      ],
+      "Default": "PedidoInvalido"
+    },
+
+    "PedidoInvalido": {
+      "Type": "Fail",
+      "Error": "PedidoInvalido",
+      "Cause": "El pedido no tiene orderId"
+    },
+
+    "RegistrarRecepcion": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
       "Parameters": {
         "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
         "Payload": {
           "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
           "estado": "RECIBIDO"
         }
       },
       "ResultPath": null,
+      "Retry": [
+        {
+          "ErrorEquals": ["Lambda.ServiceException", "Lambda.AWSLambdaException"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ErrorGeneral",
+          "ResultPath": "$.error"
+        }
+      ],
+      "Next": "PreparacionParalela"
+    },
+
+    "PreparacionParalela": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "NotificarCocina",
+          "States": {
+            "NotificarCocina": {
+              "Type": "Wait",
+              "Seconds": 2,
+              "Next": "CocinaLista"
+            },
+            "CocinaLista": {
+              "Type": "Pass",
+              "Result": {"preparacion": "cocina_lista"},
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "NotificarAlmacen",
+          "States": {
+            "NotificarAlmacen": {
+              "Type": "Wait",
+              "Seconds": 1,
+              "Next": "AlmacenListo"
+            },
+            "AlmacenListo": {
+              "Type": "Pass",
+              "Result": {"preparacion": "almacen_listo"},
+              "End": true
+            }
+          }
+        }
+      ],
+      "ResultPath": null,
       "Next": "EN_COCINA"
     },
+
     "EN_COCINA": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
@@ -22,15 +96,101 @@
         "FunctionName": {"Fn::GetAtt": ["RegistrarLambdaFunction", "Arn"]},
         "Payload": {
           "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
           "estado": "EN_COCINA",
           "workerId.$": "$.workerId",
           "taskToken.$": "$$.Task.Token"
         }
       },
       "ResultPath": null,
-      "Next": "EN_DESPACHO",
-      "HeartbeatSeconds": 3600
+      "Retry": [
+        {
+          "ErrorEquals": ["Lambda.ServiceException"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 2,
+          "BackoffRate": 2
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.HeartbeatTimeout"],
+          "Next": "TimeoutCocina",
+          "ResultPath": "$.error"
+        },
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ErrorGeneral",
+          "ResultPath": "$.error"
+        }
+      ],
+      "HeartbeatSeconds": 3600,
+      "Next": "EmitirCocinaCompleta"
     },
+
+    "TimeoutCocina": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
+          "estado": "TIMEOUT_COCINA"
+        }
+      },
+      "ResultPath": null,
+      "Next": "EN_COCINA"
+    },
+
+    "EmitirCocinaCompleta": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
+          "estado": "EN_COCINA"
+        }
+      },
+      "ResultPath": null,
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ErrorGeneral",
+          "ResultPath": "$.error"
+        }
+      ],
+      "Next": "VerificarStockDespacho"
+    },
+
+    "VerificarStockDespacho": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.workerId",
+          "IsPresent": true,
+          "Next": "EN_DESPACHO"
+        }
+      ],
+      "Default": "AsignarWorkerDefault"
+    },
+
+    "AsignarWorkerDefault": {
+      "Type": "Pass",
+      "Result": {"workerId": "worker-default"},
+      "ResultPath": "$.workerAsignado",
+      "Next": "EN_DESPACHO"
+    },
+
     "EN_DESPACHO": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
@@ -38,15 +198,82 @@
         "FunctionName": {"Fn::GetAtt": ["RegistrarLambdaFunction", "Arn"]},
         "Payload": {
           "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
           "estado": "EN_DESPACHO",
           "workerId.$": "$.workerId",
           "taskToken.$": "$$.Task.Token"
         }
       },
       "ResultPath": null,
-      "Next": "EN_REPARTO",
-      "HeartbeatSeconds": 3600
+      "Retry": [
+        {
+          "ErrorEquals": ["Lambda.ServiceException"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 2,
+          "BackoffRate": 2
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.HeartbeatTimeout"],
+          "Next": "TimeoutDespacho",
+          "ResultPath": "$.error"
+        },
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ErrorGeneral",
+          "ResultPath": "$.error"
+        }
+      ],
+      "HeartbeatSeconds": 3600,
+      "Next": "EmitirDespachoCompleto"
     },
+
+    "TimeoutDespacho": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
+          "estado": "TIMEOUT_DESPACHO"
+        }
+      },
+      "ResultPath": null,
+      "Next": "EN_DESPACHO"
+    },
+
+    "EmitirDespachoCompleto": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
+          "estado": "EN_DESPACHO"
+        }
+      },
+      "ResultPath": null,
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ErrorGeneral",
+          "ResultPath": "$.error"
+        }
+      ],
+      "Next": "EN_REPARTO"
+    },
+
     "EN_REPARTO": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke.waitForTaskToken",
@@ -54,27 +281,133 @@
         "FunctionName": {"Fn::GetAtt": ["RegistrarLambdaFunction", "Arn"]},
         "Payload": {
           "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
           "estado": "EN_REPARTO",
           "workerId.$": "$.workerId",
           "taskToken.$": "$$.Task.Token"
         }
       },
       "ResultPath": null,
-      "Next": "ENTREGADO",
-      "HeartbeatSeconds": 7200
+      "Retry": [
+        {
+          "ErrorEquals": ["Lambda.ServiceException"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 2,
+          "BackoffRate": 2
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.HeartbeatTimeout"],
+          "Next": "TimeoutReparto",
+          "ResultPath": "$.error"
+        },
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ErrorGeneral",
+          "ResultPath": "$.error"
+        }
+      ],
+      "HeartbeatSeconds": 7200,
+      "Next": "EmitirRepartoCompleto"
     },
-    "ENTREGADO": {
+
+    "TimeoutReparto": {
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
       "Parameters": {
         "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
         "Payload": {
           "orderId.$": "$.orderId",
-          "estado": "ENTREGADO"
+          "tenantId.$": "$.tenantId",
+          "estado": "TIMEOUT_REPARTO"
         }
       },
       "ResultPath": null,
-      "End": true
+      "Next": "EN_REPARTO"
+    },
+
+    "EmitirRepartoCompleto": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
+          "estado": "EN_REPARTO"
+        }
+      },
+      "ResultPath": null,
+      "Next": "FinalizarEntrega"
+    },
+
+    "FinalizarEntrega": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "RegistrarEntrega",
+          "States": {
+            "RegistrarEntrega": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "Parameters": {
+                "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
+                "Payload": {
+                  "orderId.$": "$.orderId",
+                  "tenantId.$": "$.tenantId",
+                  "estado": "ENTREGADO"
+                }
+              },
+              "ResultPath": null,
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "EsperarConfirmacion",
+          "States": {
+            "EsperarConfirmacion": {
+              "Type": "Wait",
+              "Seconds": 3,
+              "Next": "EntregaConfirmada"
+            },
+            "EntregaConfirmada": {
+              "Type": "Pass",
+              "Result": {"confirmacion": "ok"},
+              "End": true
+            }
+          }
+        }
+      ],
+      "ResultPath": null,
+      "Next": "ENTREGADO"
+    },
+
+    "ENTREGADO": {
+      "Type": "Succeed"
+    },
+
+    "ErrorGeneral": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": {"Fn::GetAtt": ["EmitirStepCompletedLambdaFunction", "Arn"]},
+        "Payload": {
+          "orderId.$": "$.orderId",
+          "tenantId.$": "$.tenantId",
+          "estado": "ERROR"
+        }
+      },
+      "ResultPath": null,
+      "Next": "FalloCritico"
+    },
+
+    "FalloCritico": {
+      "Type": "Fail",
+      "Error": "ErrorCritico",
+      "Cause": "El workflow encontró un error irrecuperable"
     }
+
   }
 }

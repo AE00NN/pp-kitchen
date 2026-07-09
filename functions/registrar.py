@@ -8,6 +8,7 @@ def handler(event, context):
     table.put_item(Item={
         'orderId':   event['orderId'],
         'estado':    event['estado'],
+        'tenantId':  event.get('tenantId', 'sin-tenant'),
         'workerId':  event.get('workerId', 'sin-asignar'),
         'taskToken': event['taskToken'],
         'timestamp': datetime.now(timezone.utc).isoformat(),
