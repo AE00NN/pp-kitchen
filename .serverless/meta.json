@@ -57,7 +57,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                  "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                  "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
                 },
                 "Handler": "functions/registrar.handler",
                 "Runtime": "python3.12",
@@ -81,7 +81,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                  "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                  "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
                 },
                 "Handler": "functions/completar.handler",
                 "Runtime": "python3.12",
@@ -105,7 +105,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                  "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                  "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
                 },
                 "Handler": "functions/listar_pendientes.handler",
                 "Runtime": "python3.12",
@@ -129,7 +129,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                  "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                  "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
                 },
                 "Handler": "functions/emitir_step_completed.handler",
                 "Runtime": "python3.12",
@@ -153,7 +153,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                  "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                  "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
                 },
                 "Handler": "functions/iniciar_workflow.handler",
                 "Runtime": "python3.12",
@@ -485,7 +485,7 @@
                 "ListarPendientesLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1783622079134": {
+            "ApiGatewayDeployment1783642337750": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -1448,7 +1448,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
               },
               "Handler": "functions/registrar.handler",
               "Runtime": "python3.12",
@@ -1472,7 +1472,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
               },
               "Handler": "functions/completar.handler",
               "Runtime": "python3.12",
@@ -1496,7 +1496,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
               },
               "Handler": "functions/listar_pendientes.handler",
               "Runtime": "python3.12",
@@ -1520,7 +1520,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
               },
               "Handler": "functions/emitir_step_completed.handler",
               "Runtime": "python3.12",
@@ -1544,7 +1544,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-                "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+                "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
               },
               "Handler": "functions/iniciar_workflow.handler",
               "Runtime": "python3.12",
@@ -1876,7 +1876,7 @@
               "ListarPendientesLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1783622079134": {
+          "ApiGatewayDeployment1783642337750": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2162,18 +2162,18 @@
     "serviceProviderAwsCfStackName": "pp-kitchen-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:048311469334:stack/pp-kitchen-dev/964c3880-724a-11f1-8c7c-0affeb4db1af",
     "serviceProviderAwsCfStackCreated": "2026-06-27T17:06:50.139Z",
-    "serviceProviderAwsCfStackUpdated": null,
-    "serviceProviderAwsCfStackStatus": "CREATE_COMPLETE",
+    "serviceProviderAwsCfStackUpdated": "2026-07-09T18:34:55.766Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "ListarPendientesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-listarPendientes:2",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-listarPendientes:3",
         "Description": "Current Lambda function version",
         "ExportName": "sls-pp-kitchen-dev-ListarPendientesLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "IniciarWorkflowLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-iniciarWorkflow:2",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-iniciarWorkflow:3",
         "Description": "Current Lambda function version",
         "ExportName": "sls-pp-kitchen-dev-IniciarWorkflowLambdaFunctionQualifiedArn"
       },
@@ -2185,19 +2185,19 @@
       },
       {
         "OutputKey": "RegistrarLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-registrar:2",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-registrar:3",
         "Description": "Current Lambda function version",
         "ExportName": "sls-pp-kitchen-dev-RegistrarLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "CompletarLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-completar:2",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-completar:3",
         "Description": "Current Lambda function version",
         "ExportName": "sls-pp-kitchen-dev-CompletarLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "EmitirStepCompletedLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-emitirStepCompleted:2",
+        "OutputValue": "arn:aws:lambda:us-east-1:048311469334:function:pp-kitchen-dev-emitirStepCompleted:3",
         "Description": "Current Lambda function version",
         "ExportName": "sls-pp-kitchen-dev-EmitirStepCompletedLambdaFunctionQualifiedArn"
       },
@@ -2252,7 +2252,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-              "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+              "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
             },
             "Handler": "functions/registrar.handler",
             "Runtime": "python3.12",
@@ -2276,7 +2276,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-              "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+              "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
             },
             "Handler": "functions/completar.handler",
             "Runtime": "python3.12",
@@ -2300,7 +2300,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-              "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+              "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
             },
             "Handler": "functions/listar_pendientes.handler",
             "Runtime": "python3.12",
@@ -2324,7 +2324,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-              "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+              "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
             },
             "Handler": "functions/emitir_step_completed.handler",
             "Runtime": "python3.12",
@@ -2348,7 +2348,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-us-east-1-3bc13628-a2f7",
-              "S3Key": "serverless/pp-kitchen/dev/1783622093614-2026-07-09T18:34:53.614Z/pp-kitchen.zip"
+              "S3Key": "serverless/pp-kitchen/dev/1783642352506-2026-07-10T00:12:32.506Z/pp-kitchen.zip"
             },
             "Handler": "functions/iniciar_workflow.handler",
             "Runtime": "python3.12",
@@ -2680,7 +2680,7 @@
             "ListarPendientesLambdaPermissionApiGateway"
           ]
         },
-        "ApiGatewayDeployment1783622079134": {
+        "ApiGatewayDeployment1783642337750": {
           "Type": "AWS::ApiGateway::Deployment",
           "Properties": {
             "RestApiId": {
